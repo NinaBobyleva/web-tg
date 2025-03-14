@@ -1,4 +1,4 @@
-import { Button } from "../Button/Button";
+import { ButtonGray } from "../ButtonGray/ButtonGray";
 import { Form } from "../Form/Form";
 import { Input } from "../Input/Input";
 import styles from "./addMaterialsBlock.module.css";
@@ -13,7 +13,7 @@ export const AddMaterialsBlock = () => {
             <Input type="text" />
             <input className={styles.input} type="number" />
           </div>
-          <Button title="Добавить в заказ" />
+          <ButtonGray title="Добавить в заказ" />
         </div>
       </Form>
     </div>

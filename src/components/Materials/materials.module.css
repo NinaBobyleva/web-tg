@@ -1,9 +1,33 @@
-.li {
-  list-style-type: none;
-}
-
 .materialsBox {
-  padding: 5px 20px;
+  list-style-type: none;
+  padding: 5px 10px;
   border: 0.3px solid #bab8b8;
   border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.material {
+    padding-right: 10px;
+}
+
+.buttonBox {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.buttonQuantityBox {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.input {
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  text-align: center;
+  outline: none;
 }

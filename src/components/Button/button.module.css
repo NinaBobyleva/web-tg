@@ -1,7 +1,7 @@
 .button {
-    background: #bab9b9;
-    border-color: transparent;
-    border-radius: 5px;
-    padding: 4px 20px;
-    color: #ffffff;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  text-align: center;
+  background: #ffffff;
 }
