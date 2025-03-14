@@ -1,0 +1,31 @@
+.li {
+  list-style-type: none;
+  position: relative;
+}
+
+.categoryBox {
+  padding: 5px 15px;
+  border: 0.3px solid #bab8b8;
+  border-radius: 10px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.element {
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.elementOpen {
+  position: relative;
+  transition: transform 0.2s;
+  transform: rotate(90deg);
+}
+
+.category {
+  font-size: 24px;
+}
