@@ -1,0 +1,18 @@
+.title {
+    padding-bottom: 10px;
+    font-size: 32px;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: space-between;
+}
+
+.img {
+    width: 25px;
+    height: 25px;
+}
+
+.list {
+    padding-top: 20px;
+}

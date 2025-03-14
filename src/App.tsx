@@ -4,6 +4,7 @@ import { Wrapper } from "./components/Wrapper/Wrapper";
 import { getAllMaterials } from "./api/apiMaterials";
 import { EditOrderBlock } from "./components/EditOrderBlock/EditOrderBlock";
 import { AddMaterialsBlock } from "./components/AddMaterialsBlock/AddMaterialsBlock";
+import { DirectoryOrders } from "./components/DirectoryOrders/DirectoryOrders";
 
 function App() {
   useEffect(() => {
@@ -15,6 +16,7 @@ function App() {
     <Wrapper>
       <EditOrderBlock />
       <AddMaterialsBlock />
+      <DirectoryOrders />
     </Wrapper>
   );
 }

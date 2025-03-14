@@ -1,0 +1,16 @@
+.li {
+    list-style-type: none;
+}
+
+.categoryBox {
+    padding: 5px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0.3px solid #bab8b8;
+    border-radius: 10px;
+}
+
+.category {
+    font-size: 24px;
+}
