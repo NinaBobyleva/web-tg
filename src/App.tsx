@@ -1,18 +1,18 @@
-import "./App.css";
-import { Button } from "./components/Button/Button";
-import { Form } from "./components/Form/Form";
-import { Input } from "./components/Input/Input";
+import { useEffect } from "react";
+import styles from "./app.module.css";
+import { Wrapper } from "./components/Wrapper/Wrapper";
+import { getAllMaterials } from "./api/apiMaterials";
 
 function App() {
+  useEffect(() => {
+    const data = getAllMaterials();
+
+    console.log("data", data);
+  }, []);
   return (
-    <>
-      <Form>
-        <Input type="text" />
-        <Input type="text" />
-        <Input type="text" />
-        <Button title="Отправить" />
-      </Form>
-    </>
+    <Wrapper>
+      <h1 className={styles.title}>Редактирование заказа</h1>
+    </Wrapper>
   );
 }
 
