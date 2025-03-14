@@ -1,7 +1,7 @@
 import { Button } from '../Button/Button';
 import { ButtonRed } from '../ButtonRed/ButtonRed';
 import { Input } from '../Input/Input';
-import styles from './editBlock.module.css'
+import styles from './editOrderBlock.module.css'
 
 export const EditOrderBlock = () => {
   return (

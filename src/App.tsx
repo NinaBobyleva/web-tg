@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Wrapper } from "./components/Wrapper/Wrapper";
 import { getAllMaterials } from "./api/apiMaterials";
 import { EditOrderBlock } from "./components/EditOrderBlock/EditOrderBlock";
+import { AddMaterialsBlock } from "./components/AddMaterialsBlock/AddMaterialsBlock";
 
 function App() {
   useEffect(() => {
@@ -13,6 +14,7 @@ function App() {
   return (
     <Wrapper>
       <EditOrderBlock />
+      <AddMaterialsBlock />
     </Wrapper>
   );
 }
