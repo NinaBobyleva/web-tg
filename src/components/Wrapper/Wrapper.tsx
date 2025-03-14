@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import styles from './wrapper.module.css'
 
 type WrapperProp = {
@@ -6,6 +7,6 @@ type WrapperProp = {
 
 export const Wrapper = ({children}: WrapperProp) => {
     return (
-        <div className={styles.wrapper}>{children}</div>
+        <div className={classNames(styles.wrapper, styles.center)}>{children}</div>
     )
 }

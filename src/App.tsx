@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import styles from "./app.module.css";
+// import styles from "./app.module.css";
 import { Wrapper } from "./components/Wrapper/Wrapper";
 import { getAllMaterials } from "./api/apiMaterials";
+import { EditOrderBlock } from "./components/EditOrderBlock/EditOrderBlock";
 
 function App() {
   useEffect(() => {
@@ -11,7 +12,7 @@ function App() {
   }, []);
   return (
     <Wrapper>
-      <h1 className={styles.title}>Редактирование заказа</h1>
+      <EditOrderBlock />
     </Wrapper>
   );
 }
