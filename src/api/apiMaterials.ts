@@ -1,4 +1,4 @@
-const URL_MATERIALS = "https://46.243.187.5/api/";
+const URL_MATERIALS = "https://kr-order.ru/api/";
 
 export const getAllMaterials = async() => {
     const res = await fetch(URL_MATERIALS + "categories/");
