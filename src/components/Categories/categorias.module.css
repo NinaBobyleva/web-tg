@@ -1,12 +1,9 @@
-.li {
-  list-style-type: none;
-  position: relative;
-}
-
 .categoryBox {
+  list-style-type: none;
   padding: 5px 15px;
   border: 0.3px solid #bab8b8;
   border-radius: 10px;
+  position: relative;
 }
 
 .box {

@@ -10,25 +10,22 @@ type CategoriesProp = {
 
 export const Categories = ({ materials, name }: CategoriesProp) => {
   const [isOpenCategory, setIsOpenCategory] = useState<boolean>(false);
-  const nameM = materials.find((el) => el.name);
-  console.log(nameM);
+
   return (
-    <li className={styles.li}>
-      <div className={styles.categoryBox}>
-        <div className={styles.box}>
-          <img
-            onClick={() => setIsOpenCategory((prev) => !prev)}
-            className={isOpenCategory ? styles.elementOpen : styles.element}
-            src="./img/Polygon.svg"
-            alt="#"
-          />
-          <p className={styles.category}>{name}</p>
-        </div>
-        <ul>
-          {isOpenCategory &&
-            materials.map((el) => <Materials key={el.id} name={el.name} />)}
-        </ul>
+    <li className={styles.categoryBox}>
+      <div className={styles.box}>
+        <img
+          onClick={() => setIsOpenCategory((prev) => !prev)}
+          className={isOpenCategory ? styles.elementOpen : styles.element}
+          src="./img/Polygon.svg"
+          alt="#"
+        />
+        <p className={styles.category}>{name}</p>
       </div>
+      <ul className={styles.listMaterials}>
+        {isOpenCategory &&
+          materials.map((el) => <Materials key={el.id} name={el.name} />)}
+      </ul>
     </li>
   );
 };

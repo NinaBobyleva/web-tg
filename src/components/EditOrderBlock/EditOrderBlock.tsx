@@ -1,7 +1,7 @@
-import { Button } from '../Button/Button';
-import { ButtonRed } from '../ButtonRed/ButtonRed';
-import { Input } from '../Input/Input';
-import styles from './editOrderBlock.module.css'
+import { ButtonGray } from "../ButtonGray/ButtonGray";
+import { ButtonRed } from "../ButtonRed/ButtonRed";
+import { Input } from "../Input/Input";
+import styles from "./editOrderBlock.module.css";
 
 export const EditOrderBlock = () => {
   return (
@@ -12,7 +12,7 @@ export const EditOrderBlock = () => {
         <Input type="text" />
       </div>
       <div className={styles.buttonBox}>
-        <Button title="Обновить адрес" />
+        <ButtonGray title="Обновить адрес" />
         <ButtonRed title="Удалить заказ" />
       </div>
     </div>
