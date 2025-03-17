@@ -7,6 +7,11 @@ import { CategoriesType } from "../../types/types";
 
 export const DirectoryOrders = () => {
   const [categories, setCategories] = useState<CategoriesType[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const handleCategoryOpen = (categoryName: string) => {
+    setActiveCategory((prev) => (prev === categoryName ? null : categoryName));
+  };
 
   useEffect(() => {
     getAllMaterials().then((data) => {
@@ -22,7 +27,7 @@ export const DirectoryOrders = () => {
       </div>
       <ul className={styles.list}>
         {categories.map((el) => (
-          <Categories key={el.id} materials={el.materials} name={el.name} />
+          <Categories key={el.id} materials={el.materials} handleCategoryOpen={handleCategoryOpen} isActive={activeCategory === el.name} name={el.name} />
         ))}
       </ul>
     </div>

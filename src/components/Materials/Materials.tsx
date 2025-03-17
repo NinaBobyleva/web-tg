@@ -4,31 +4,35 @@ import styles from "./materials.module.css";
 
 type MaterialsProp = {
   name: string;
-  id: number;
   img_t: string;
   img_l: string;
 };
 
-export const Materials = ({ name, id, img_t, img_l }: MaterialsProp) => {
+export const Materials = ({
+  name,
+  img_t,
+  img_l,
+}: MaterialsProp) => {
   const [quantity, setQuantity] = useState<number>(0);
   const [isOpenImg, setIsOpenImg] = useState(false);
 
   return (
     <div className={styles.li}>
-      {isOpenImg && (
+      {isOpenImg ? (
         <div className={styles.imageBox}>
           <img className={styles.image} src={img_l} alt="material" />
           <p className={styles.imageName}>{name}</p>
-          <img onClick={() => setIsOpenImg(false)} className={styles.imageClose} src="./img/close.svg" alt="close" />
+          <img
+            onClick={() => setIsOpenImg(false)}
+            className={styles.imageClose}
+            src="./img/close.svg"
+            alt="close"
+          />
         </div>
-      )}
+      ) : null}
       <li className={styles.materialsBox}>
         <div className={styles.materialNameBox}>
-          <img
-            className={styles.materialImg}
-            src={img_t}
-            alt="material"
-          />
+          <img className={styles.materialImg} src={img_t} alt="material" />
           <p className={styles.material}>{name}</p>
         </div>
         <div className={styles.buttonBox}>
@@ -44,10 +48,10 @@ export const Materials = ({ name, id, img_t, img_l }: MaterialsProp) => {
             />
             <Button onClick={() => setQuantity(quantity + 1)} title="+" />
           </div>
-          <div onClick={() => {
-            setIsOpenImg(prev => !prev);
-            console.log(id);
-          }} className={styles.materialBtn}>
+          <div
+            onClick={() => setIsOpenImg(prev => !prev)}
+            className={styles.materialBtn}
+          >
             <div className={styles.btn}></div>
             <div className={styles.btn}></div>
             <div className={styles.btn}></div>
