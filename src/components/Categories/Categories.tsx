@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MaterialsType } from "../../types/types";
-import styles from "./categorias.module.css";
+import styles from "./categories.module.css";
 import { Materials } from "../Materials/Materials";
 
 type CategoriesProp = {
@@ -24,7 +24,7 @@ export const Categories = ({ materials, name }: CategoriesProp) => {
       </div>
       <ul className={styles.listMaterials}>
         {isOpenCategory &&
-          materials.map((el) => <Materials key={el.id} name={el.name} />)}
+          materials.map((el) => <Materials key={el.id} name={el.name} id={el.id} img_t={el.image_thumbnail_url} img_l={el.image_large_url} />)}
       </ul>
     </li>
   );

@@ -4,9 +4,12 @@ import styles from "./materials.module.css";
 
 type MaterialsProp = {
   name: string;
+  id: number;
+  img_t: string;
+  img_l: string;
 };
 
-export const Materials = ({ name }: MaterialsProp) => {
+export const Materials = ({ name, id, img_t, img_l }: MaterialsProp) => {
   const [quantity, setQuantity] = useState<number>(0);
   const [isOpenImg, setIsOpenImg] = useState(false);
 
@@ -14,7 +17,7 @@ export const Materials = ({ name }: MaterialsProp) => {
     <div className={styles.li}>
       {isOpenImg && (
         <div className={styles.imageBox}>
-          <img className={styles.image} src="./img/cement.jpg" alt="material" />
+          <img className={styles.image} src={img_l} alt="material" />
           <p className={styles.imageName}>{name}</p>
           <img onClick={() => setIsOpenImg(false)} className={styles.imageClose} src="./img/close.svg" alt="close" />
         </div>
@@ -23,7 +26,7 @@ export const Materials = ({ name }: MaterialsProp) => {
         <div className={styles.materialNameBox}>
           <img
             className={styles.materialImg}
-            src="./img/cement.jpg"
+            src={img_t}
             alt="material"
           />
           <p className={styles.material}>{name}</p>
@@ -41,7 +44,10 @@ export const Materials = ({ name }: MaterialsProp) => {
             />
             <Button onClick={() => setQuantity(quantity + 1)} title="+" />
           </div>
-          <div onClick={() => setIsOpenImg(prev => !prev)} className={styles.materialBtn}>
+          <div onClick={() => {
+            setIsOpenImg(prev => !prev);
+            console.log(id);
+          }} className={styles.materialBtn}>
             <div className={styles.btn}></div>
             <div className={styles.btn}></div>
             <div className={styles.btn}></div>
