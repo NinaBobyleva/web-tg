@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
-import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./materials.module.css";
 
 type MaterialsProp = {
   name: string;
-  // quantity: number;
-  // setQuantity: Dispatch<SetStateAction<number>>;
 };
 
 export const Materials = ({ name }: MaterialsProp) => {
@@ -15,7 +12,10 @@ export const Materials = ({ name }: MaterialsProp) => {
   return (
     <div className={styles.li}>
       <li className={styles.materialsBox}>
-        <p className={styles.material}>{name}</p>
+        <div className={styles.materialNameBox}>
+          <img className={styles.materialImg} src="./img/cement.jpg" alt="material" />
+          <p className={styles.material}>{name}</p>
+        </div>
         <div className={styles.buttonBox}>
           <div className={styles.buttonQuantityBox}>
             <Button
@@ -29,7 +29,11 @@ export const Materials = ({ name }: MaterialsProp) => {
             />
             <Button onClick={() => setQuantity(quantity + 1)} title="+" />
           </div>
-          <ButtonGray title="Подробнее" />
+          <div className={styles.materialBtn}>
+            <div className={styles.btn}></div>
+            <div className={styles.btn}></div>
+            <div className={styles.btn}></div>
+          </div>
         </div>
       </li>
     </div>

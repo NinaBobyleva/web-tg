@@ -6,8 +6,6 @@ import { Materials } from "../Materials/Materials";
 type CategoriesProp = {
   materials: MaterialsType[];
   name: string;
-  // quantity: number;
-  // setQuantity: Dispatch<SetStateAction<number>>;
 };
 
 export const Categories = ({ materials, name }: CategoriesProp) => {
