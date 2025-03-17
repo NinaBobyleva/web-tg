@@ -7,6 +7,7 @@ import { CategoriesType } from "../../types/types";
 
 export const DirectoryOrders = () => {
   const [categories, setCategories] = useState<CategoriesType[]>([]);
+  console.log(categories);
 
   useEffect(() => {
     getAllMaterials().then((data) => {
