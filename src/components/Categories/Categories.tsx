@@ -1,30 +1,50 @@
-import { useState } from "react";
 import { MaterialsType } from "../../types/types";
-import styles from "./categorias.module.css";
+import styles from "./categories.module.css";
 import { Materials } from "../Materials/Materials";
+import { useState } from "react";
 
 type CategoriesProp = {
   materials: MaterialsType[];
   name: string;
+  handleCategoryOpen: (categoryName: string) => void;
+  isActive: boolean;
 };
 
-export const Categories = ({ materials, name }: CategoriesProp) => {
-  const [isOpenCategory, setIsOpenCategory] = useState<boolean>(false);
+export const Categories = ({
+  materials,
+  name,
+  handleCategoryOpen,
+  isActive,
+}: CategoriesProp) => {
+  const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
+
+  const handleImageOpen = (materialName: string) => {
+    setActiveMaterial((prev) => (prev === materialName ? null : materialName));
+  };
 
   return (
     <li className={styles.categoryBox}>
       <div className={styles.box}>
         <img
-          onClick={() => setIsOpenCategory((prev) => !prev)}
-          className={isOpenCategory ? styles.elementOpen : styles.element}
+          onClick={() => handleCategoryOpen(name)}
+          className={isActive ? styles.elementOpen : styles.element}
           src="./img/Polygon.svg"
           alt="#"
         />
         <p className={styles.category}>{name}</p>
       </div>
       <ul className={styles.listMaterials}>
-        {isOpenCategory &&
-          materials.map((el) => <Materials key={el.id} name={el.name} />)}
+        {isActive &&
+          materials.map((el) => (
+            <Materials
+              key={el.id}
+              name={el.name}
+              isActiveMaterial={activeMaterial === el.name}
+              handleImageOpen={handleImageOpen}
+              img_t={el.image_thumbnail_url}
+              img_l={el.image_large_url}
+            />
+          ))}
       </ul>
     </li>
   );

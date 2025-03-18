@@ -2,6 +2,6 @@
 }
 
 .center {
-  padding-left: calc(50% - 700px / 2);
-  padding-right: calc(50% - 700px / 2);
+  padding-left: calc(50% - 500px / 2);
+  padding-right: calc(50% - 500px / 2);
 }
