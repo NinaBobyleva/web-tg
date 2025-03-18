@@ -7,7 +7,7 @@
   padding-top: 10px;
   padding-bottom: 20px;
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
 }
 
 .inputBox {
@@ -19,6 +19,8 @@
   width: 40px;
   border-radius: 10px;
   border: 0.5px solid;
+  outline: none;
+  padding: 3px 5px;
 }
 
 .input[type="number"]::-webkit-outer-spin-button,
