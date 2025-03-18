@@ -3,12 +3,12 @@
 }
 
 .imageBox {
-  width: 450px;
+  width: 350px;
   border-radius: 5px;
   background: #f4f4f4e1;
   position: fixed;
-  top: 250px;
-  left: 0px;
+  top: 200px;
+  left: 13px;
   z-index: 2;
   display: flex;
   flex-direction: column;

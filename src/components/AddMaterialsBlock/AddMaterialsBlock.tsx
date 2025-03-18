@@ -13,7 +13,7 @@ export const AddMaterialsBlock = () => {
             <Input type="text" />
             <input className={styles.input} type="number" />
           </div>
-          <ButtonGray title="Добавить в заказ" />
+          <ButtonGray title="Добавить" />
         </div>
       </Form>
     </div>
