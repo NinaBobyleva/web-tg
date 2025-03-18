@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.orderTitle {
+  padding-top: 30px;
+}
+
+.orderBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btnBox {
+  display: flex;
+  gap: 5px;
+}
+
+.loginBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
