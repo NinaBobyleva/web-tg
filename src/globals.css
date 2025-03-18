@@ -6,5 +6,8 @@
 
 html,
 body {
+  width: 375px;
   background: #f4f4f4e1;
+  padding-left: calc(50% - 375px / 2);
+  padding-right: calc(50% - 375px / 2);
 }
