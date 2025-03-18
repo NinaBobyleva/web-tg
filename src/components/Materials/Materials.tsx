@@ -6,24 +6,27 @@ type MaterialsProp = {
   name: string;
   img_t: string;
   img_l: string;
+  isActiveMaterial: boolean;
+  handleImageOpen: (materialName: string) => void;
 };
 
 export const Materials = ({
   name,
   img_t,
   img_l,
+  isActiveMaterial,
+  handleImageOpen,
 }: MaterialsProp) => {
   const [quantity, setQuantity] = useState<number>(0);
-  const [isOpenImg, setIsOpenImg] = useState(false);
 
   return (
     <div className={styles.li}>
-      {isOpenImg ? (
+      {isActiveMaterial ? (
         <div className={styles.imageBox}>
           <img className={styles.image} src={img_l} alt="material" />
           <p className={styles.imageName}>{name}</p>
           <img
-            onClick={() => setIsOpenImg(false)}
+            onClick={() => handleImageOpen('')}
             className={styles.imageClose}
             src="./img/close.svg"
             alt="close"
@@ -49,7 +52,7 @@ export const Materials = ({
             <Button onClick={() => setQuantity(quantity + 1)} title="+" />
           </div>
           <div
-            onClick={() => setIsOpenImg(prev => !prev)}
+            onClick={() => handleImageOpen(name)}
             className={styles.materialBtn}
           >
             <div className={styles.btn}></div>

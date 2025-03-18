@@ -1,6 +1,7 @@
 import { MaterialsType } from "../../types/types";
 import styles from "./categories.module.css";
 import { Materials } from "../Materials/Materials";
+import { useState } from "react";
 
 type CategoriesProp = {
   materials: MaterialsType[];
@@ -9,7 +10,18 @@ type CategoriesProp = {
   isActive: boolean;
 };
 
-export const Categories = ({ materials, name, handleCategoryOpen, isActive }: CategoriesProp) => {
+export const Categories = ({
+  materials,
+  name,
+  handleCategoryOpen,
+  isActive,
+}: CategoriesProp) => {
+  const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
+
+  const handleImageOpen = (materialName: string) => {
+    setActiveMaterial((prev) => (prev === materialName ? null : materialName));
+  };
+
   return (
     <li className={styles.categoryBox}>
       <div className={styles.box}>
@@ -27,6 +39,8 @@ export const Categories = ({ materials, name, handleCategoryOpen, isActive }: Ca
             <Materials
               key={el.id}
               name={el.name}
+              isActiveMaterial={activeMaterial === el.name}
+              handleImageOpen={handleImageOpen}
               img_t={el.image_thumbnail_url}
               img_l={el.image_large_url}
             />

@@ -1,22 +1,28 @@
 .title {
-    padding-top: 15px;
-    font-size: 32px;
+  padding-top: 15px;
+  font-size: 32px;
 }
 
 .formBox {
-    padding-top: 10px;
-    padding-bottom: 20px;
-    display: flex;
-    gap: 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  gap: 30px;
 }
 
 .inputBox {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .input {
-    width: 40px;
-    border-radius: 10px;
-    border: 0.5px solid;
+  width: 40px;
+  border-radius: 10px;
+  border: 0.5px solid;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
