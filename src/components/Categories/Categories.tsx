@@ -1,13 +1,14 @@
 import { MaterialsType } from "../../types/types";
 import styles from "./categories.module.css";
 import { Materials } from "../Materials/Materials";
-import { useState } from "react";
 
 type CategoriesProp = {
   materials: MaterialsType[];
   name: string;
   handleCategoryOpen: (categoryName: string) => void;
   isActive: boolean;
+  activeMaterial: string | null;
+  setActiveMaterial: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export const Categories = ({
@@ -15,18 +16,17 @@ export const Categories = ({
   name,
   handleCategoryOpen,
   isActive,
+  activeMaterial,
+  setActiveMaterial,
 }: CategoriesProp) => {
-  const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
-
   const handleImageOpen = (materialName: string) => {
     setActiveMaterial((prev) => (prev === materialName ? null : materialName));
   };
 
   return (
     <li className={styles.categoryBox}>
-      <div className={styles.box}>
+      <div onClick={() => handleCategoryOpen(name)} className={styles.box}>
         <img
-          onClick={() => handleCategoryOpen(name)}
           className={isActive ? styles.elementOpen : styles.element}
           src="./img/Polygon.svg"
           alt="#"
