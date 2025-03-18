@@ -13,6 +13,11 @@
     height: 25px;
 }
 
+.loadMassage {
+    padding-top: 30px;
+    text-align: center;
+}
+
 .list {
     padding-top: 20px;
     padding-bottom: 60px;
