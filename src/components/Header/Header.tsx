@@ -3,9 +3,8 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
 export const Header = () => {
-  const { initDataRaw, initData } = retrieveLaunchParams();
-  console.log("initData", initData);
-  console.log("initDataRaw", initDataRaw);
+  const launchParams  = retrieveLaunchParams();
+  console.log("launchParams", launchParams);
   return (
     <div className={styles.header}>
       <div className={styles.orderBox}>
