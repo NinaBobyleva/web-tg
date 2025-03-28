@@ -3,8 +3,8 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
 export const Header = () => {
-  const launchParams  = retrieveLaunchParams();
-  console.log("launchParams", launchParams);
+  const {tgWebAppData}  = retrieveLaunchParams();
+  console.log("launchParams", tgWebAppData);
   return (
     <div className={styles.header}>
       <div className={styles.orderBox}>
@@ -15,7 +15,7 @@ export const Header = () => {
         </div>
       </div>
       <div className={styles.loginBox}>
-        <p className={styles.login}>234765@mail.ru</p>
+        <p className={styles.login}>{}</p>
         <ButtonGray title="Выйти" />
       </div>
     </div>
