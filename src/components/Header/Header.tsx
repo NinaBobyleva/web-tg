@@ -15,7 +15,7 @@ export const Header = () => {
         </div>
       </div>
       <div className={styles.loginBox}>
-        <p className={styles.login}>{}</p>
+        <p className={styles.login}>{tgWebAppData?.user?.username}</p>
         <ButtonGray title="Выйти" />
       </div>
     </div>
