@@ -1,10 +1,10 @@
 import { AppRoutes } from "./AppRoutes";
+import { useMockTelegramEnv } from "./hooks/useMockTelegramEnv";
 
 function App() {
-  
-  return (
-    <AppRoutes />
-  );
+  useMockTelegramEnv();
+
+  return <AppRoutes />;
 }
 
 export default App;
