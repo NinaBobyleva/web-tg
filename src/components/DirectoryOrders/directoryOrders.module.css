@@ -1,24 +1,24 @@
 .title {
-    padding-bottom: 10px;
-    font-size: 32px;
+  padding-bottom: 10px;
+  font-size: 32px;
 }
 
 .buttonBox {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .img {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
 .loadMassage {
-    padding-top: 30px;
-    text-align: center;
+  padding-top: 30px;
+  text-align: center;
 }
 
 .list {
-    padding-top: 20px;
-    padding-bottom: 60px;
+  padding-top: 20px;
+  padding-bottom: 60px;
 }
