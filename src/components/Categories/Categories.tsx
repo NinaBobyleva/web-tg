@@ -26,11 +26,7 @@ export const Categories = ({
   return (
     <li className={styles.categoryBox}>
       <div onClick={() => handleCategoryOpen(name)} className={styles.box}>
-        <img
-          className={isActive ? styles.elementOpen : styles.element}
-          src="./img/Polygon.svg"
-          alt="#"
-        />
+        <img className={isActive ? styles.elementOpen : styles.element} src="./img/Polygon.svg" alt="#" />
         <p className={styles.category}>{name}</p>
       </div>
       <ul className={styles.listMaterials}>
