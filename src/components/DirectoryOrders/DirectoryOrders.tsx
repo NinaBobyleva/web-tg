@@ -4,6 +4,8 @@ import styles from "./directoryOrders.module.css";
 import { getAllMaterials } from "../../api/apiMaterials";
 import { Categories } from "../Categories/Categories";
 import { CategoriesType } from "../../types/types";
+import { Link } from "react-router-dom";
+import { paths } from "../../paths";
 
 export const DirectoryOrders = () => {
   const [isLoad, setIsLoad] = useState(false);
@@ -34,7 +36,7 @@ export const DirectoryOrders = () => {
       <h2 className={styles.title}>Выбрать из справочника</h2>
       <div className={styles.buttonBox}>
         <ButtonGray title="Добавить выбранное" />
-        <img className={styles.img} src="./img/basket.svg" alt="" />
+        <Link to={paths.BASKET}><img className={styles.img} src="./img/basket.svg" alt="" /></Link>
       </div>
       {isLoad ? (
         <p className={styles.loadMassage}>Данные загружаются</p>
