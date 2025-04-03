@@ -1,5 +1,5 @@
+import { Basket } from "../../components/Basket/Basket";
+
 export const BasketPage = () => {
-    return (
-        <h1>Корзина</h1>
-    );
-}
+  return <Basket />;
+};
