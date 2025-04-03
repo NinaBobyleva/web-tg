@@ -1,0 +1,101 @@
+.li {
+  position: relative;
+}
+
+.imageBox {
+  width: 350px;
+  border-radius: 5px;
+  background: #f4f4f4e1;
+  position: absolute;
+  top: -200px;
+  left: 0px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  height: 300px;
+  width: 300px;
+  border-radius: 5px;
+  padding-top: 20px;
+}
+
+.imageName {
+  padding: 15px 30px;
+  text-align: center;
+}
+
+.imageClose {
+  padding-bottom: 20px;
+}
+
+.materialNameBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.materialImg {
+  height: 35px;
+  width: 35px;
+  border-radius: 5px;
+}
+
+.materialsBox {
+  list-style-type: none;
+  padding: 5px 10px;
+  border: 0.3px solid #bab8b8;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.material {
+  padding-right: 10px;
+}
+
+.buttonBox {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.buttonQuantityBox {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.input {
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  text-align: center;
+  border: 0.1px solid;
+  outline: none;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.materialBtn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2px;
+}
+
+.btn {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #949494;
+}

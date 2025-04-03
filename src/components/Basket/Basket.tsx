@@ -5,11 +5,16 @@ import styles from "./basket.module.css";
 import { paths } from "../../paths";
 import { useEffect, useState } from "react";
 import { getAllBasketMaterials } from "../../api/apiMaterials";
-import { CategoriesType } from "../../types/types";
+import { CategoriesBasketType, OrdersType } from "../../types/types";
+import { BasketCategories } from "../BasketCategories/BasketCategories";
 
 export const Basket = () => {
-  const [basketCategories, setBasketCategories] = useState<CategoriesType[]>([]);
+  const [basketCategories, setBasketCategories] = useState<OrdersType[]>([]);
+  const id = 46;
   console.log(basketCategories);
+  const order: OrdersType | undefined = basketCategories.find((el) => el.id === id);
+  const orderId: CategoriesBasketType[] | undefined = order?.materials_by_category;
+  console.log(orderId);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +36,11 @@ export const Basket = () => {
           <ButtonRed title="Отправить заказ" />
         </div>
       </div>
+      <ul>
+        {orderId?.map((el) => (
+          <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} />
+        ))}
+      </ul>
     </div>
   );
 };

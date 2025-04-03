@@ -4,7 +4,7 @@ import { retrieveLaunchParams } from "@telegram-apps/bridge";
 
 export const Header = () => {
   const { tgWebAppData } = retrieveLaunchParams();
-  console.log("launchParams", tgWebAppData);
+  // console.log("launchParams", tgWebAppData);
 
   return (
     <div className={styles.header}>

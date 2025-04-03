@@ -10,6 +10,7 @@ import { paths } from "../../paths";
 export const DirectoryOrders = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [categories, setCategories] = useState<CategoriesType[]>([]);
+  // console.log("categories", categories);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
 

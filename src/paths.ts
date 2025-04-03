@@ -1,4 +1,4 @@
 export const paths = {
   HOME: "/",
-  BASKET: "/basket",
+  BASKET: "/basket/:id",
 };
