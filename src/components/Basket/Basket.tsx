@@ -4,28 +4,32 @@ import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./basket.module.css";
 import { paths } from "../../paths";
 import { useEffect, useState } from "react";
-import { getAllBasketMaterials } from "../../api/apiMaterials";
-import { CategoriesBasketType, OrdersType } from "../../types/types";
+import { getOrder } from "../../api/apiMaterials";
+import { CategoriesBasketType } from "../../types/types";
 import { BasketCategories } from "../BasketCategories/BasketCategories";
 
 export const Basket = () => {
-  const [basketCategories, setBasketCategories] = useState<OrdersType[]>([]);
-  const id = 46;
-  console.log(basketCategories);
-  const order: OrdersType | undefined = basketCategories.find((el) => el.id === id);
-  const orderId: CategoriesBasketType[] | undefined = order?.materials_by_category;
-  console.log(orderId);
+  // const [basketCategories, setBasketCategories] = useState<OrdersType[]>([]);
+  const [order, setOrder] = useState<CategoriesBasketType[]>([]);
+  // console.log("order", order);
+  const id = 24;
+  // const order: OrdersType | undefined = basketCategories.find((el) => el.id === id);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAllBasketMaterials()
+    // getAllBasketMaterials()
+    //   .then((data) => {
+    //     setBasketCategories(data.results);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+    //   .finally(() => {});
+
+      getOrder({id})
       .then((data) => {
-        setBasketCategories(data.results);
+        setOrder(data.materials_by_category);
       })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {});
   }, []);
   return (
     <div className={styles.wrapperBasket}>
@@ -36,9 +40,9 @@ export const Basket = () => {
           <ButtonRed title="Отправить заказ" />
         </div>
       </div>
-      <ul>
-        {orderId?.map((el) => (
-          <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} />
+      <ul className={styles.list}>
+        {order.map((el) => (
+          <BasketCategories key={el.id} setOrder={setOrder} materialsBasket={el.materials} title={el.name} orderId={id} />
         ))}
       </ul>
     </div>

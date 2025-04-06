@@ -1,11 +1,16 @@
 .headerBasket {
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btnBox {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
+}
+
+.list {
+  padding-top: 20px;
+  padding-bottom: 60px;
 }

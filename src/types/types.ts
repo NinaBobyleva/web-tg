@@ -37,6 +37,7 @@ export type MaterialsBasketType = {
   quantity: number;
   status: null;
   url: string;
+  order_item_id: number;
 };
 
 export type AddressType = {
