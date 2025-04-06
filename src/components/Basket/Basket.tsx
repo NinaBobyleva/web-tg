@@ -3,34 +3,24 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./basket.module.css";
 import { paths } from "../../paths";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getOrder } from "../../api/apiMaterials";
-import { CategoriesBasketType } from "../../types/types";
 import { BasketCategories } from "../BasketCategories/BasketCategories";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setOrder } from "../../store/features/materialsSlice";
 
 export const Basket = () => {
-  // const [basketCategories, setBasketCategories] = useState<OrdersType[]>([]);
-  const [order, setOrder] = useState<CategoriesBasketType[]>([]);
+  const dispatch = useAppDispatch();
+  const order = useAppSelector((state) => state.materials.order);
   // console.log("order", order);
   const id = 24;
-  // const order: OrdersType | undefined = basketCategories.find((el) => el.id === id);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // getAllBasketMaterials()
-    //   .then((data) => {
-    //     setBasketCategories(data.results);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-    //   .finally(() => {});
-
-      getOrder({id})
-      .then((data) => {
-        setOrder(data.materials_by_category);
-      })
-  }, []);
+    getOrder({ id }).then((data) => {
+      dispatch(setOrder(data.materials_by_category));
+    });
+  }, [dispatch]);
   return (
     <div className={styles.wrapperBasket}>
       <div className={styles.headerBasket}>
@@ -42,7 +32,7 @@ export const Basket = () => {
       </div>
       <ul className={styles.list}>
         {order.map((el) => (
-          <BasketCategories key={el.id} setOrder={setOrder} materialsBasket={el.materials} title={el.name} orderId={id} />
+          <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={id} />
         ))}
       </ul>
     </div>

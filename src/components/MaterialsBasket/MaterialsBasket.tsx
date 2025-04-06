@@ -1,8 +1,9 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import styles from "./materialsBasket.module.css";
 import { deleteOrderItem, editOrderItem, getOrder } from "../../api/apiMaterials";
-import { CategoriesBasketType } from "../../types/types";
+import { useAppDispatch } from "../../store/store";
+import { setOrder } from "../../store/features/materialsSlice";
 
 type MaterialsBasketProp = {
   title: string;
@@ -10,11 +11,11 @@ type MaterialsBasketProp = {
   quantity: number;
   id: number;
   orderId: number;
-  setOrder: Dispatch<SetStateAction<CategoriesBasketType[]>>;
 };
 
-export const MaterialsBasket = ({ title, img, quantity, id, orderId, setOrder }: MaterialsBasketProp) => {
+export const MaterialsBasket = ({ title, img, quantity, id, orderId }: MaterialsBasketProp) => {
   const [quantityCounter, setQuantityCounter] = useState(quantity);
+  const dispatch = useAppDispatch();
   // console.log("quantityCounter", quantityCounter);
 
   useEffect(() => {
@@ -35,8 +36,7 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId, setOrder }:
   const handleDeleteMaterial = async () => {
     await deleteOrderItem({ id }).then();
     await getOrder({ id: orderId }).then((data) => {
-      console.log(1);
-      setOrder(data.materials_by_category);
+      dispatch(setOrder(data.materials_by_category));
     });
   };
 

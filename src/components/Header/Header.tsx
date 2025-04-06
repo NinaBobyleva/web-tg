@@ -12,7 +12,6 @@ export const Header = () => {
         <p className={styles.orderTitle}>Заказы</p>
         <div className={styles.btnBox}>
           <ButtonGray title="Мои заказы" />
-          <ButtonGray title="API документация" />
         </div>
       </div>
       <div className={styles.loginBox}>
