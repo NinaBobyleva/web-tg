@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.orderBox}>
-        <p className={styles.orderTitle}>Заказы</p>
+        <img className={styles.logo} src="./img/logo.png" alt="logo" />
         <div className={styles.btnBox}>
           <ButtonGray title="Мои заказы" />
         </div>
