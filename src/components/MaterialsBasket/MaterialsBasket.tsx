@@ -14,30 +14,45 @@ type MaterialsBasketProp = {
 };
 
 export const MaterialsBasket = ({ title, img, quantity, id, orderId }: MaterialsBasketProp) => {
-  const [quantityCounter, setQuantityCounter] = useState(quantity);
+  const [value, setValue] = useState(quantity.toString());
   const dispatch = useAppDispatch();
-  // console.log("quantityCounter", quantityCounter);
 
   useEffect(() => {
-    editOrderItem({ id, quantityCounter }).then((res) => {
-      setQuantityCounter(res.quantity);
-    });
-  }, [quantityCounter, id, orderId]);
+    editOrderItem({ id, quantity: Number(value) }).then((res) => res);
+  }, [value, id]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 10);
-    if (!isNaN(newValue)) {
-      setQuantityCounter(newValue);
-    } else if (e.target.value === "") {
-      return;
+    const newValue = e.target.value;
+
+    if (/^\d*$/.test(newValue)) {
+      setValue(newValue);
     }
+  };
+
+  const handleBlur = () => {
+    const numValue = parseInt(value) || 1;
+    setValue(numValue.toString());
+  };
+
+  const handleIncrement = () => {
+    const newValue = (parseInt(value) || 0) + 1;
+    setValue(newValue.toString());
+  };
+
+  const handleDecrement = () => {
+    const current = parseInt(value) || 1;
+    const newValue = current > 1 ? current - 1 : 1;
+    setValue(newValue.toString());
   };
 
   const handleDeleteMaterial = async () => {
     await deleteOrderItem({ id }).then();
     await getOrder({ id: orderId }).then((data) => {
       dispatch(setOrder(data.materials_by_category));
-    });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   };
 
   return (
@@ -48,9 +63,17 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId }: Materials
       </div>
       <div className={styles.buttonBox}>
         <div className={styles.buttonQuantityBox}>
-          <Button title="-" onClick={() => setQuantityCounter((prev) => (prev > 0 ? prev - 1 : 0))} />
-          <input type="number" className={styles.buttonBoxInput} onChange={handleInputChange} value={quantityCounter} />
-          <Button title="+" onClick={() => setQuantityCounter((prev) => prev + 1)} />
+          <Button title="-" onClick={handleDecrement} />
+          <input
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            className={styles.buttonBoxInput}
+            onBlur={handleBlur}
+            onChange={handleInputChange}
+            value={value}
+          />
+          <Button title="+" onClick={handleIncrement} />
         </div>
         <img onClick={handleDeleteMaterial} className={styles.buttonBoxImg} src="./img/close.svg" alt="close" />
       </div>

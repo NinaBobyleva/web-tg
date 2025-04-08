@@ -5,7 +5,8 @@ type SeminarsStateType = {
   categories: CategoriesType[];
   order: CategoriesBasketType[];
   isLoad: boolean;
-  orderId: number
+  orderId: number;
+  error: string;
 };
 
 const initialState: SeminarsStateType = {
@@ -13,6 +14,7 @@ const initialState: SeminarsStateType = {
   order: [],
   isLoad: false,
   orderId: 0,
+  error: "",
 };
 
 const materialsSlice = createSlice({
@@ -31,8 +33,11 @@ const materialsSlice = createSlice({
     setOrderId: (state, action: PayloadAction<number>) => {
         state.orderId = action.payload;
     },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    }
   },
 });
 
-export const { setCategories, setOrder, setIsLoad, setOrderId } = materialsSlice.actions;
+export const { setCategories, setOrder, setIsLoad, setOrderId, setError } = materialsSlice.actions;
 export const materialsReducers = materialsSlice.reducer;

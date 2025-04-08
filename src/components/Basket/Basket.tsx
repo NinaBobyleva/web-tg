@@ -7,19 +7,23 @@ import { useEffect } from "react";
 import { getOrder } from "../../api/apiMaterials";
 import { BasketCategories } from "../BasketCategories/BasketCategories";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setOrder } from "../../store/features/materialsSlice";
+import { setError, setOrder } from "../../store/features/materialsSlice";
 
 export const Basket = () => {
   const dispatch = useAppDispatch();
-  const order = useAppSelector((state) => state.materials.order);
-  // console.log("order", order);
+  const { order, error } = useAppSelector((state) => state.materials);
+  console.log("order", order);
   const id = 24;
   const navigate = useNavigate();
 
   useEffect(() => {
-    getOrder({ id }).then((data) => {
-      dispatch(setOrder(data.materials_by_category));
-    });
+    getOrder({ id })
+      .then((data) => {
+        dispatch(setOrder(data.materials_by_category));
+      })
+      .catch((error) => {
+        dispatch(setError(error.message));
+      });
   }, [dispatch]);
   return (
     <div className={styles.wrapperBasket}>
@@ -30,11 +34,15 @@ export const Basket = () => {
           <ButtonRed title="Отправить заказ" />
         </div>
       </div>
-      <ul className={styles.list}>
-        {order.map((el) => (
-          <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={id} />
-        ))}
-      </ul>
+      {!error ? (
+        <ul className={styles.list}>
+          {order.map((el) => (
+            order.length !== 0 ? <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={id} /> : <p className={styles.error}>В заказе отсутствуют позиции</p>
+          ))}
+        </ul>
+      ) : (
+        <p className={styles.error}>{error}</p>
+      )}
     </div>
   );
 };
