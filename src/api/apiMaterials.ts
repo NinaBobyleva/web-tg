@@ -49,13 +49,17 @@ export const deleteOrder = async ({ id }: { id: number }) => {
     },
   });
 
-  // if (!res.ok) {
-  //   throw new Error("error");
-  // }
+  if (res.status === 404) {
+    throw new Error("Такого заказа не существует");
+  }
 
-  // if (res.status === 204) {
-  //   return null;
-  // }
+  if (res.status === 500) {
+    throw new Error("Сервер устал, попробуйте еще раз");
+  }
+
+  if (!res.ok) {
+    throw new Error("Что-то пошло не так");
+  }
 
   const response = await res.json();
   return response;
