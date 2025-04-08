@@ -75,7 +75,7 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId }: Materials
           />
           <Button title="+" onClick={handleIncrement} />
         </div>
-        <img onClick={handleDeleteMaterial} className={styles.buttonBoxImg} src="./img/close.svg" alt="close" />
+        <img onClick={handleDeleteMaterial} className={styles.buttonBoxImg} src="./img/delete.svg" alt="close" />
       </div>
     </li>
   );

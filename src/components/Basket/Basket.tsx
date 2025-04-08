@@ -13,7 +13,7 @@ export const Basket = () => {
   const dispatch = useAppDispatch();
   const { order, error } = useAppSelector((state) => state.materials);
   console.log("order", order);
-  const id = 24;
+  const id = 33;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const Basket = () => {
       {!error ? (
         <ul className={styles.list}>
           {order.map((el) => (
-            order.length !== 0 ? <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={id} /> : <p className={styles.error}>В заказе отсутствуют позиции</p>
+             <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={id} />
           ))}
         </ul>
       ) : (
@@ -46,3 +46,5 @@ export const Basket = () => {
     </div>
   );
 };
+
+// {!order.length && <p className={styles.error}>В заказе отсутствуют позиции</p>}

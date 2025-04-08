@@ -1,5 +1,5 @@
 export const paths = {
   HOME: "/",
-  BASKET: "/basket/:id",
+  BASKET: "/basket",
   NOT_FOUND: "*",
 };
