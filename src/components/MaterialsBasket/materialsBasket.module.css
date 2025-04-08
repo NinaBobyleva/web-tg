@@ -1,0 +1,58 @@
+.materialsBox {
+  position: relative;
+  list-style-type: none;
+  padding: 5px 10px;
+  border: 0.3px solid #bab8b8;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.materialNameBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.materialImg {
+  height: 35px;
+  width: 35px;
+  border-radius: 5px;
+}
+
+.material {
+  padding-right: 10px;
+}
+
+.buttonBox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.buttonQuantityBox {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.buttonBoxInput {
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  text-align: center;
+  border: 0.1px solid;
+  outline: none;
+}
+
+.buttonBoxInput[type="number"]::-webkit-outer-spin-button,
+.buttonBoxInput[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.buttonBoxImg {
+  height: 20px;
+  width: 20px;
+}

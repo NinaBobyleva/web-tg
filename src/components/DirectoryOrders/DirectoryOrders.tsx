@@ -3,11 +3,15 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./directoryOrders.module.css";
 import { getAllMaterials } from "../../api/apiMaterials";
 import { Categories } from "../Categories/Categories";
-import { CategoriesType } from "../../types/types";
+import { Link } from "react-router-dom";
+import { paths } from "../../paths";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setCategories, setIsLoad } from "../../store/features/materialsSlice";
 
 export const DirectoryOrders = () => {
-  const [isLoad, setIsLoad] = useState(false);
-  const [categories, setCategories] = useState<CategoriesType[]>([]);
+  const dispatch = useAppDispatch();
+  const { categories, isLoad } = useAppSelector((state) => state.materials);
+  // console.log("categories", categories);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
 
@@ -17,24 +21,26 @@ export const DirectoryOrders = () => {
   };
 
   useEffect(() => {
-    setIsLoad(true);
+    dispatch(setIsLoad(true));
     getAllMaterials()
       .then((data) => {
-        setCategories(data.results);
+        dispatch(setCategories(data.results));
       })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        setIsLoad(false);
+        dispatch(setIsLoad(false));
       });
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <h2 className={styles.title}>Выбрать из справочника</h2>
       <div className={styles.buttonBox}>
         <ButtonGray title="Добавить выбранное" />
-        <img className={styles.img} src="./img/basket.svg" alt="" />
+        <Link to={paths.BASKET}>
+          <img className={styles.img} src="./img/basket.svg" alt="" />
+        </Link>
       </div>
       {isLoad ? (
         <p className={styles.loadMassage}>Данные загружаются</p>

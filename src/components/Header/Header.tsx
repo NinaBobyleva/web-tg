@@ -1,13 +1,10 @@
 import styles from "./header.module.css";
 import { ButtonGray } from "../ButtonGray/ButtonGray";
-// import { retrieveLaunchParams } from '@telegram-apps/sdk';
-// import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import { retrieveLaunchParams } from "@telegram-apps/bridge";
 
 export const Header = () => {
   const { tgWebAppData } = retrieveLaunchParams();
-  // const launchParams = retrieveLaunchParams();
-  console.log("launchParams", tgWebAppData);
+  // console.log("launchParams", tgWebAppData);
 
   return (
     <div className={styles.header}>
@@ -15,7 +12,6 @@ export const Header = () => {
         <p className={styles.orderTitle}>Заказы</p>
         <div className={styles.btnBox}>
           <ButtonGray title="Мои заказы" />
-          <ButtonGray title="API документация" />
         </div>
       </div>
       <div className={styles.loginBox}>
