@@ -1,13 +1,18 @@
-import { AddMaterialsBlock } from "../AddMaterialsBlock/AddMaterialsBlock";
-import { DirectoryOrders } from "../DirectoryOrders/DirectoryOrders";
-import { EditOrderBlock } from "../EditOrderBlock/EditOrderBlock";
+import { ButtonGray } from "../ButtonGray/ButtonGray";
+import { Input } from "../Input/Input";
+import styles from "./createOrder.module.css";
 
 export const CreateOrder = () => {
   return (
-    <>
-      <EditOrderBlock />
-      <AddMaterialsBlock />
-      <DirectoryOrders />
-    </>
+    <div className={styles.createOrderBox}>
+      <Input type="text" placeholder="Выберите адрес" value="str" />
+      {/* <input className={styles.createOrderInput} type="text" placeholder="Выберите адрес" /> */}
+      <div>
+        <h3>Желаемая дата доставки</h3>
+        <input className={styles.createOrderInput} type="date" />
+      </div>
+      <ul className={styles.addressList}></ul>
+      <ButtonGray title="Создать заказ" />
+    </div>
   );
 };

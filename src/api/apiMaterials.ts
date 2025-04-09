@@ -1,4 +1,5 @@
-const BASE_URL = "https://kr-order.ru/api/";
+const BASE_URL = "https://dev.kr-order.ru/api/";
+// const BASE_URL = "https://kr-order.ru/api/";
 
 export const getAllMaterials = async () => {
   const res = await fetch(BASE_URL + "categories/");
@@ -15,12 +16,12 @@ export const getAllMaterials = async () => {
   return response;
 };
 
-// export const getOrders = async () => {
-//   const res = await fetch(BASE_URL + "orders/");
+export const getOrders = async () => {
+  const res = await fetch(BASE_URL + "orders/");
 
-//   const response = await res.json();
-//   return response;
-// };
+  const response = await res.json();
+  return response;
+};
 
 export const getOrder = async ({ id }: { id: number }) => {
   const res = await fetch(BASE_URL + `orders/${id}/`);

@@ -1,0 +1,19 @@
+.orderItemList {
+  padding: 8px 0px;
+  display: flex;
+  justify-content: space-around;
+  /* gap: 5px; */
+  border-bottom: 0.5px solid #000;
+}
+
+.orderItemBox {
+  display: flex;
+  /* justify-content: space-around; */
+  gap: 3px;
+}
+
+.orderBtnBox {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}

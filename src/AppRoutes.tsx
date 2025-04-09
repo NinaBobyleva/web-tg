@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { CreateOrderPage } from "./pages/CreateOrderPage/CreateOrderPage";
+import { AddMaterialsPage } from "./pages/AddMaterialsPage/AddMaterialsPage";
 import { paths } from "./paths";
 import { Layout } from "./components/Layout/Layout";
 import { BasketPage } from "./pages/BasketPage/BasketPage";
@@ -10,7 +10,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path={paths.HOME} element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path={paths.CREATE_ORDER} element={<CreateOrderPage />} />
+        <Route path={paths.CREATE_ORDER} element={<AddMaterialsPage />} />
         <Route path={paths.BASKET} element={<BasketPage />} />
       </Route>
     </Routes>

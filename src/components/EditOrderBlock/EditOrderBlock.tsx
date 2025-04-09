@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteOrder } from "../../api/apiMaterials";
 // import { useAppDispatch } from "../../store/store";
 import { ButtonRed } from "../ButtonRed/ButtonRed";
-import { Input } from "../Input/Input";
+// import { Input } from "../Input/Input";
 import styles from "./editOrderBlock.module.css";
 import { paths } from "../../paths";
 
@@ -18,7 +18,7 @@ export const EditOrderBlock = () => {
       <h1 className={styles.title}>Редактирование заказа №{id}</h1>
       <div className={styles.inputBox}>
         <span>Адрес:</span>
-        <Input type="text" />
+        {/* <Input type="text" /> */}
       </div>
       <div className={styles.buttonBox}>
         <ButtonRed onClick={() => {

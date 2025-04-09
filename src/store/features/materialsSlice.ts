@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CategoriesBasketType, CategoriesType } from "../../types/types";
+import { CategoriesBasketType, CategoriesType, OrdersType } from "../../types/types";
 
 type SeminarsStateType = {
   categories: CategoriesType[];
   order: CategoriesBasketType[];
+  orders: OrdersType[];
   isLoad: boolean;
   orderId: number;
   error: string;
@@ -12,6 +13,7 @@ type SeminarsStateType = {
 const initialState: SeminarsStateType = {
   categories: [],
   order: [],
+  orders: [],
   isLoad: false,
   orderId: 0,
   error: "",
@@ -25,19 +27,22 @@ const materialsSlice = createSlice({
       state.categories = action.payload;
     },
     setOrder: (state, action: PayloadAction<[]>) => {
-        state.order = action.payload;
-      },
+      state.order = action.payload;
+    },
     setIsLoad: (state, action: PayloadAction<boolean>) => {
-        state.isLoad = action.payload;
+      state.isLoad = action.payload;
     },
     setOrderId: (state, action: PayloadAction<number>) => {
-        state.orderId = action.payload;
+      state.orderId = action.payload;
     },
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-    }
+    },
+    setOrders: (state, action: PayloadAction<[]>) => {
+      state.orders = action.payload;
+    },
   },
 });
 
-export const { setCategories, setOrder, setIsLoad, setOrderId, setError } = materialsSlice.actions;
+export const { setCategories, setOrder, setIsLoad, setOrderId, setError, setOrders } = materialsSlice.actions;
 export const materialsReducers = materialsSlice.reducer;
