@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CategoriesBasketType, CategoriesType, OrdersType } from "../../types/types";
+import { AddressType, CategoriesBasketType, CategoriesType, OrdersType } from "../../types/types";
 
 type SeminarsStateType = {
   categories: CategoriesType[];
   order: CategoriesBasketType[];
   orders: OrdersType[];
+  addresses: AddressType[];
   isLoad: boolean;
   orderId: number;
   error: string;
@@ -14,6 +15,7 @@ const initialState: SeminarsStateType = {
   categories: [],
   order: [],
   orders: [],
+  addresses: [],
   isLoad: false,
   orderId: 0,
   error: "",
@@ -41,8 +43,11 @@ const materialsSlice = createSlice({
     setOrders: (state, action: PayloadAction<[]>) => {
       state.orders = action.payload;
     },
+    setAddresses: (state, action: PayloadAction<[]>) => {
+      state.addresses = action.payload;
+    },
   },
 });
 
-export const { setCategories, setOrder, setIsLoad, setOrderId, setError, setOrders } = materialsSlice.actions;
+export const { setCategories, setOrder, setIsLoad, setOrderId, setError, setOrders, setAddresses } = materialsSlice.actions;
 export const materialsReducers = materialsSlice.reducer;

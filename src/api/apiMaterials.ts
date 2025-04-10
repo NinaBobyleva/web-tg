@@ -1,6 +1,21 @@
 const BASE_URL = "https://dev.kr-order.ru/api/";
 // const BASE_URL = "https://kr-order.ru/api/";
 
+export const getAllAddresses = async () => {
+  const res = await fetch(BASE_URL + "addresses/");
+
+  if (res.status === 500) {
+    throw new Error("Сервер устал, попробуйте еще раз");
+  }
+
+  if (!res.ok) {
+    throw new Error("Что-то пошло не так");
+  }
+
+  const response = await res.json();
+  return response;
+};
+
 export const getAllMaterials = async () => {
   const res = await fetch(BASE_URL + "categories/");
 

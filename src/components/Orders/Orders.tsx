@@ -13,7 +13,7 @@ export const Orders = () => {
   const orders = useAppSelector((state) => state.materials.orders);
   const ordersUser = orders.filter((el) => el.user !== null && el.user.email === tgWebAppData?.user?.username);
   // console.log("orders", orders);
-  console.log("ordersUser", ordersUser);
+  // console.log("ordersUser", ordersUser);
 
   useEffect(() => {
     getOrders().then((data) => {

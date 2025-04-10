@@ -9,7 +9,7 @@ type OrderItemProp = {
 }
 
 export const OrderItem = ({orderId, address}: OrderItemProp) => {
-    console.log(address);
+    // console.log(address);
     return (
         <li className={styles.orderItemList}>
             <div className={styles.orderItemBox}>
