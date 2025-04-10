@@ -12,6 +12,7 @@ export const Orders = () => {
   const dispatch = useAppDispatch();
   const orders = useAppSelector((state) => state.materials.orders);
   const ordersUser = orders.filter((el) => el.user !== null && el.user.email === tgWebAppData?.user?.username);
+  const user = ordersUser.find((el) => el.user);
   // console.log("orders", orders);
   console.log("ordersUser", ordersUser);
 
@@ -24,7 +25,7 @@ export const Orders = () => {
   return (
     <div className={styles.ordersBox}>
       <h1 className={styles.ordersTitle}>Ваши заказы</h1>
-      <CreateOrder />
+      <CreateOrder user={user?.user.id} />
       <ul className={styles.OrderItemBlock}>
         {ordersUser.map((el) => (
           <OrderItem key={el.id} orderId={el.id} address={el.address} itemsCount={el.items_count} totalQuantity={el.total_quantity} />

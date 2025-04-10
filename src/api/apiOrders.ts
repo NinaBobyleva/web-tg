@@ -1,3 +1,5 @@
+import { newOrder } from "../types/types";
+
 const ORDERS_URL = "https://dev.kr-order.ru/api/orders/";
 
 export const getOrders = async () => {
@@ -21,6 +23,20 @@ export const getOrder = async ({ id }: { id: number }) => {
   if (!res.ok) {
     throw new Error("Что-то пошло не так");
   }
+
+  const response = await res.json();
+  return response;
+};
+
+export const postOrder = async (newOrder: newOrder) => {
+  console.log(newOrder);
+  const res = await fetch(ORDERS_URL, {
+    method: "POST",
+    body: JSON.stringify(newOrder),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const response = await res.json();
   return response;

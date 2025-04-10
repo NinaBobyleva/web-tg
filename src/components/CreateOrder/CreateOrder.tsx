@@ -7,27 +7,53 @@ import { setAddresses, setCurrentAddress } from "../../store/features/materialsS
 import { AddressList } from "../AddressList/AddressList";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
+import { postOrder } from "../../api/apiOrders";
+import { newOrder } from "../../types/types";
 
-export const CreateOrder = () => {
+export const CreateOrder = ({user}: {user: number | undefined}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   //   console.log(isOpen);
   const [inputValueAddress, setInputValueAddress] = useState("");
-//   console.log(inputValueAddress);
+  //   console.log(inputValueAddress);
   const [addressId, setAddressId] = useState(0);
   const addresses = useAppSelector((state) => state.materials.addresses);
   //   console.log("addresses", addresses);
+  const [inputValueDate, setInputValueDate] = useState("");
+
+  const handleAddNewOrder = () => {
+    const newOrder: newOrder = {
+      address: addressId,
+      user: user,
+      status: "draft",
+      comment: "",
+      date_of_delivery: inputValueDate
+    }
+
+    console.log(newOrder);
+
+    postOrder(newOrder)
+    .then((date) => {
+      console.log(date);
+    })
+
+    navigate(paths.UPDATE);
+  }
+
   useEffect(() => {
     const value = addresses.find((el) => el.id === addressId);
-    // console.log(value);
     if (!value) {
-        return;
+      return;
     }
     setInputValueAddress(
       `${value?.city}, ${value?.street}, ${value?.house}${value?.building}, ${value?.office}, ${value?.floor}`,
     );
-    dispatch(setCurrentAddress(`${value?.city}, ${value?.street}, ${value?.house}${value?.building}, ${value?.office}, ${value?.floor}`))
+    dispatch(
+      setCurrentAddress(
+        `${value?.city}, ${value?.street}, ${value?.house}${value?.building}, ${value?.office}, ${value?.floor}`,
+      ),
+    );
   }, [addressId, addresses, dispatch]);
 
   const handleAddresses = () => {
@@ -38,9 +64,6 @@ export const CreateOrder = () => {
     }
   };
 
-  const handleAddOrder = () => {
-    navigate(paths.UPDATE);
-  };
   return (
     <div className={styles.createOrderBox}>
       <div className={styles.createOrderAddressBox}>
@@ -84,9 +107,9 @@ export const CreateOrder = () => {
       </div>
       <div className={styles.createOrderDateBox}>
         <h3 className={styles.createOrderTitle}>Желаемая дата доставки:</h3>
-        <input className={styles.createOrderInputDate} type="date" />
+        <input onChange={(e) => setInputValueDate(e.target.value)} className={styles.createOrderInputDate} type="date" />
       </div>
-      <ButtonGray onClick={handleAddOrder} title="Создать заказ" />
+      <ButtonGray onClick={handleAddNewOrder} title="Создать заказ" />
     </div>
   );
 };

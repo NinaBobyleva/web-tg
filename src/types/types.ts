@@ -54,4 +54,17 @@ export type AddressType = {
 
 export type UserType = {
   email: string;
+  first_name: string;
+  id: number;
+  last_name: string;
+  telegram_id: number;
+  telegram_username: string;
 };
+
+export type newOrder = {
+  address: number;
+  user: number | undefined;
+  status: string;
+  comment: string;
+  date_of_delivery: string;
+}
