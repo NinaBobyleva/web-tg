@@ -1,6 +1,6 @@
 export const paths = {
   HOME: "/",
-  CREATE_ORDER: "/create",
+  UPDATE: "/update",
   BASKET: "/basket",
   NOT_FOUND: "*",
 };

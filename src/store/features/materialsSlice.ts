@@ -6,6 +6,7 @@ type SeminarsStateType = {
   order: CategoriesBasketType[];
   orders: OrdersType[];
   addresses: AddressType[];
+  currentAddress: string;
   isLoad: boolean;
   orderId: number;
   error: string;
@@ -16,6 +17,7 @@ const initialState: SeminarsStateType = {
   order: [],
   orders: [],
   addresses: [],
+  currentAddress: "",
   isLoad: false,
   orderId: 0,
   error: "",
@@ -46,8 +48,12 @@ const materialsSlice = createSlice({
     setAddresses: (state, action: PayloadAction<[]>) => {
       state.addresses = action.payload;
     },
+    setCurrentAddress: (state, action: PayloadAction<string>) => {
+      state.currentAddress = action.payload;
+    },
   },
 });
 
-export const { setCategories, setOrder, setIsLoad, setOrderId, setError, setOrders, setAddresses } = materialsSlice.actions;
+export const { setCategories, setOrder, setIsLoad, setOrderId, setError, setOrders, setAddresses, setCurrentAddress } =
+  materialsSlice.actions;
 export const materialsReducers = materialsSlice.reducer;

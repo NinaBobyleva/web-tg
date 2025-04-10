@@ -20,6 +20,8 @@ export type OrdersType = {
   status: string;
   updated_at: string;
   user: UserType;
+  items_count: number;
+  total_quantity: number;
 };
 
 export type CategoriesBasketType = {

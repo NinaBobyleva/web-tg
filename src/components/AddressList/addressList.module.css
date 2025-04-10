@@ -1,0 +1,8 @@
+.addressListBox {
+    padding: 5px 5px;
+}
+
+.addressListBox:hover {
+    background: rgb(216, 216, 216);
+    border-radius: 5px;
+}

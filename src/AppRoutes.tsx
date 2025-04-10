@@ -10,7 +10,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path={paths.HOME} element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path={paths.CREATE_ORDER} element={<AddMaterialsPage />} />
+        <Route path={paths.UPDATE} element={<AddMaterialsPage />} />
         <Route path={paths.BASKET} element={<BasketPage />} />
       </Route>
     </Routes>

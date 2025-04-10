@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styles from "./orders.module.css";
-import { getOrders } from "../../api/apiMaterials";
+import { getOrders } from "../../api/apiOrders";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setOrders } from "../../store/features/materialsSlice";
 import { OrderItem } from "../OrderItem/OrderItem";
@@ -13,7 +13,7 @@ export const Orders = () => {
   const orders = useAppSelector((state) => state.materials.orders);
   const ordersUser = orders.filter((el) => el.user !== null && el.user.email === tgWebAppData?.user?.username);
   // console.log("orders", orders);
-  // console.log("ordersUser", ordersUser);
+  console.log("ordersUser", ordersUser);
 
   useEffect(() => {
     getOrders().then((data) => {
@@ -27,7 +27,7 @@ export const Orders = () => {
       <CreateOrder />
       <ul className={styles.OrderItemBlock}>
         {ordersUser.map((el) => (
-          <OrderItem key={el.id} orderId={el.id} address={el.address} />
+          <OrderItem key={el.id} orderId={el.id} address={el.address} itemsCount={el.items_count} totalQuantity={el.total_quantity} />
         ))}
       </ul>
     </div>

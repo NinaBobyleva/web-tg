@@ -7,13 +7,36 @@ type AddressListProp = {
   building: string;
   office: string;
   floor: string;
+  id: number;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setAddressId: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const AddressList = ({ city, street, house, building, office, floor }: AddressListProp) => {
-  console.log(1);
+export const AddressList = ({
+  city,
+  street,
+  house,
+  building,
+  office,
+  floor,
+  id,
+  setIsOpen,
+  setAddressId,
+}: AddressListProp) => {
   return (
     <li className={styles.addressListBox}>
-      <span>{city}, {street}, {house}{building}, {office}, {floor}</span>
+      <div
+        onClick={() => {
+          console.log(id);
+          setIsOpen(false);
+          setAddressId(id);
+        }}
+      >
+        <span>
+          {city}, {street}, {house}
+          {building}, {office}, {floor}
+        </span>
+      </div>
     </li>
   );
 };

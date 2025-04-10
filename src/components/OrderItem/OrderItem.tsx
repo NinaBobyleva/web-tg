@@ -4,22 +4,32 @@ import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./orderItem.module.css";
 
 type OrderItemProp = {
-    orderId: number;
-    address: AddressType;
-}
+  orderId: number;
+  address: AddressType;
+  itemsCount: number;
+  totalQuantity: number;
+};
 
-export const OrderItem = ({orderId, address}: OrderItemProp) => {
-    // console.log(address);
-    return (
-        <li className={styles.orderItemList}>
-            <div className={styles.orderItemBox}>
-                <p className={styles.orderItemId}>№{orderId}</p>
-                <p className={styles.orderItemAddress}>{address.street}, {address.house}</p>
-            </div>
-            <div className={styles.orderBtnBox}>
-                <ButtonGray title="Редактировать" />
-                <ButtonRed title="Удалить" />
-            </div>
-        </li>
-    );
-}
+export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: OrderItemProp) => {
+  // console.log(address);
+  return (
+    <li className={styles.orderItemList}>
+      <div className={styles.orderItemBox}>
+        <div className={styles.orderItem}>
+          <p className={styles.orderItemId}>№{orderId}</p>
+          <p className={styles.orderItemAddress}>
+            {address.street}, {address.house}
+          </p>
+        </div>
+        <div>
+            <p>Позиций в заказе - {itemsCount}</p>
+            <p>Общ. кол-во (шт.) - {totalQuantity}</p>
+        </div>
+      </div>
+      <div className={styles.orderBtnBox}>
+        <ButtonGray title="Редактировать" />
+        <ButtonRed title="Удалить" />
+      </div>
+    </li>
+  );
+};

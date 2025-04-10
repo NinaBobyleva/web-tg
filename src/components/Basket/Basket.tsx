@@ -4,7 +4,7 @@ import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./basket.module.css";
 import { paths } from "../../paths";
 import { useEffect } from "react";
-import { getOrder } from "../../api/apiMaterials";
+import { getOrder } from "../../api/apiOrders";
 import { BasketCategories } from "../BasketCategories/BasketCategories";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setError, setOrder } from "../../store/features/materialsSlice";
