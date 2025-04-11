@@ -67,4 +67,4 @@ export type newOrder = {
   status: string;
   comment: string;
   date_of_delivery: string;
-}
+};

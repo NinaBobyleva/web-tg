@@ -1,13 +1,12 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 5px;
 }
 
 .orderBox {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .logo {
@@ -17,13 +16,15 @@
 
 .btnBox {
   display: flex;
+  align-items: flex-end;
   gap: 5px;
+  margin-bottom: 7px;
 }
 
 .loginBox {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
 }
 
 .login {

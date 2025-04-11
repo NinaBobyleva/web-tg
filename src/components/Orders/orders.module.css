@@ -7,3 +7,9 @@
   border: 0.5px solid #000;
   border-radius: 5px;
 }
+
+.noOrders {
+  font-weight: 600;
+  color: rgb(60, 60, 60);
+  text-align: center;
+}

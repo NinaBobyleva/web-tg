@@ -12,14 +12,16 @@ export const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.orderBox}>
-        <Link to={paths.HOME}><img className={styles.logo} src="./img/logo.png" alt="logo" /></Link>
+        <Link to={paths.HOME}>
+          <img className={styles.logo} src="./img/logo.png" alt="logo" />
+        </Link>
         <div className={styles.btnBox}>
           <ButtonGray onClick={() => navigate(paths.HOME)} title="Мои заказы" />
+          <ButtonGray title="Выйти" />
         </div>
       </div>
       <div className={styles.loginBox}>
-        <p className={styles.login}>{tgWebAppData?.user?.username}</p>
-        <ButtonGray title="Выйти" />
+        <p className={styles.login}>{tgWebAppData?.user?.first_name}</p>
       </div>
     </div>
   );

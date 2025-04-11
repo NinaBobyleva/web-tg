@@ -38,6 +38,14 @@ export const postOrder = async (newOrder: newOrder) => {
     },
   });
 
+  if (res.status === 500) {
+    throw new Error("Сервер устал, попробуйте еще раз");
+  }
+
+  if (!res.ok) {
+    throw new Error("Что-то пошло не так");
+  }
+
   const response = await res.json();
   return response;
 };
