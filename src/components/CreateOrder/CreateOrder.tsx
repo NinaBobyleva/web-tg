@@ -3,7 +3,7 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./createOrder.module.css";
 import { getAllAddresses } from "../../api/apiMaterials";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setAddresses, setCurrentAddress } from "../../store/features/materialsSlice";
+import { setAddresses, setCurrentAddress, setCurrentOrderId } from "../../store/features/materialsSlice";
 import { AddressList } from "../AddressList/AddressList";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
@@ -31,11 +31,12 @@ export const CreateOrder = ({user}: {user: number | undefined}) => {
       date_of_delivery: inputValueDate
     }
 
-    console.log(newOrder);
+    // console.log(newOrder);
 
     postOrder(newOrder)
     .then((date) => {
-      console.log(date);
+      dispatch(setCurrentOrderId(date.id));
+      // dispatch(setUserOrders());
     })
 
     navigate(paths.UPDATE);

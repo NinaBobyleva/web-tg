@@ -9,7 +9,8 @@ import { useAppSelector } from "../../store/store";
 
 export const EditOrderBlock = () => {
   // const dispatch = useAppDispatch();
-  const address = useAppSelector((state) => state.materials.currentAddress);
+  const {currentAddress, currentOrderId} = useAppSelector((state) => state.materials);
+  console.log(currentOrderId);
   const navigate = useNavigate();
   const id = 80;
   const handleDeleteOrder = () => {
@@ -17,10 +18,10 @@ export const EditOrderBlock = () => {
   };
   return (
     <div className={styles.editBlock}>
-      <h1 className={styles.title}>Редактирование заказа №{id}</h1>
+      <h1 className={styles.title}>Редактирование заказа №{currentOrderId}</h1>
       <div className={styles.inputBox}>
         <span>Адрес:</span>
-        <Input type="text" value={address} />
+        <Input type="text" value={currentAddress} />
       </div>
       <div className={styles.buttonBox}>
         <ButtonRed onClick={() => {

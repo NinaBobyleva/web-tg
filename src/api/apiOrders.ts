@@ -50,7 +50,7 @@ export const postOrder = async (newOrder: newOrder) => {
   return response;
 };
 
-export const deleteOrder = async ({ id }: { id: number }) => {
+export const deleteOrder = async ({id}: {id: number}) => {
   const res = await fetch(ORDERS_URL + `${id}/`, {
     method: "DELETE",
     headers: {

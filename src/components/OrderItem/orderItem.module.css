@@ -7,8 +7,16 @@
 
 .orderItem {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
   padding-bottom: 5px;
+}
+
+.orderItemId {
+  font-weight: 600;
+}
+
+.orderItemAddress {
+  font-weight: 600;
 }
 
 .orderBtnBox {

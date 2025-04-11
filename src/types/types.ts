@@ -16,7 +16,7 @@ export type OrdersType = {
   comment: null;
   created_at: string;
   id: number;
-  materials_by_category: CategoriesBasketType[];
+  // materials_by_category: CategoriesBasketType[];
   status: string;
   updated_at: string;
   user: UserType;

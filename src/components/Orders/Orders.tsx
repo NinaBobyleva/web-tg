@@ -15,8 +15,8 @@ export const Orders = () => {
   const orders = useAppSelector((state) => state.materials.orders);
   // console.log("orders", orders);
   const user = useAppSelector((state) => state.user.user);
-  const ordersUser = orders.filter((el) => el.user !== null && el.user.id === user?.id);
-  // console.log("ordersUser", ordersUser);
+  const userOrders = orders.filter((el) => el.user !== null && el.user.id === user?.id);
+  // console.log("userOrders", userOrders);
 
   useEffect(() => {
     getOrders()
@@ -36,6 +36,7 @@ export const Orders = () => {
 
     postUser(userData)
       .then((res) => {
+        console.log(res);
         dispatch(setUser(res));
       })
       .catch((error) => {
@@ -46,9 +47,9 @@ export const Orders = () => {
     <div className={styles.ordersBox}>
       <h1 className={styles.ordersTitle}>Ваши заказы</h1>
       <CreateOrder user={user?.id} />
-      {ordersUser.length !== 0 ? (
-        <ul className={styles.OrderItemBlock}>
-          {ordersUser.map((el) => (
+      <ul className={styles.OrderItemBlock}>
+        {userOrders.map((el) =>
+          userOrders.length !== 0 ? (
             <OrderItem
               key={el.id}
               orderId={el.id}
@@ -56,11 +57,11 @@ export const Orders = () => {
               itemsCount={el.items_count}
               totalQuantity={el.total_quantity}
             />
-          ))}
-        </ul>
-      ) : (
-        <p className={styles.noOrders}>У вас пока нет заказов</p>
-      )}
+          ) : (
+            <p className={styles.noOrders}>У вас пока нет заказов</p>
+          ),
+        )}
+      </ul>
     </div>
   );
 };

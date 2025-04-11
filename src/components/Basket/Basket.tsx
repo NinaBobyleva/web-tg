@@ -33,7 +33,7 @@ export const Basket = () => {
         <div className={styles.headerBasket}>
           <h2 className={styles.title}>Ваш заказ</h2>
           <div className={styles.btnBox}>
-            <ButtonGray onClick={() => navigate(paths.HOME)} title="Назад" />
+            <ButtonGray onClick={() => navigate(paths.UPDATE)} title="Назад" />
             <ButtonRed title="Отправить заказ" />
           </div>
         </div>

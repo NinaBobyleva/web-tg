@@ -3,11 +3,13 @@ import { UserType } from "../../types/types";
 
 type SeminarsStateType = {
   user: UserType | null;
+  id: number | undefined;
   error: string;
 };
 
 const initialState: SeminarsStateType = {
   user: null,
+  id: 0,
   error: "",
 };
 
@@ -17,6 +19,7 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<UserType | null>) => {
       state.user = action.payload;
+      state.id = state.user?.id;
     },
   },
 });
