@@ -1,7 +1,8 @@
 import styles from "./header.module.css";
 import { ButtonGray } from "../ButtonGray/ButtonGray";
 import { retrieveLaunchParams } from "@telegram-apps/bridge";
-import { init, backButton } from '@telegram-apps/sdk';
+// import { init, backButton } from '@telegram-apps/sdk';
+import { on, postEvent } from "@telegram-apps/bridge";
 import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 
@@ -10,13 +11,20 @@ export const Header = () => {
   const { tgWebAppData } = retrieveLaunchParams();
   console.log("launchParams", tgWebAppData);
 
-  init();
-  backButton.mount();
+  postEvent("web_app_setup_back_button", { is_visible: true });
 
-  const off = backButton.onClick(() => {
+  const off = on("back_button_pressed", () => {
+    postEvent("web_app_setup_back_button", { is_visible: false });
     off();
-    window.history.back();
   });
+
+  // init();
+  // backButton.mount();
+
+  // const off = backButton.onClick(() => {
+  //   off();
+  //   window.history.back();
+  // });
 
   return (
     <div className={styles.header}>
