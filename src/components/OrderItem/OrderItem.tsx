@@ -5,8 +5,10 @@ import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./orderItem.module.css";
 import { paths } from "../../paths";
 import { useAppDispatch } from "../../store/store";
-import { setCurrentAddress, setCurrentOrderId } from "../../store/features/materialsSlice";
+import { setCurrentAddress, setCurrentOrder, setCurrentOrderId, setError } from "../../store/features/materialsSlice";
 import { useDeleteOrder } from "../../hooks/useDeleteOrder";
+import { getOrder } from "../../api/apiOrders";
+import { formatAddress } from "../../helpers/formatAddress";
 
 type OrderItemProp = {
   orderId: number;
@@ -18,9 +20,23 @@ type OrderItemProp = {
 export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: OrderItemProp) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const longAddress = `${address.city}, ${address.street}, ${address.house}${address.building}, ${address.office}, ${address.floor}`;
+  const handleDeleteOrder = useDeleteOrder({ id: orderId });
 
-  const handleDeleteOrder = useDeleteOrder({id: orderId});
+  const handleEditOrder = () => {
+    getOrder({ id: orderId })
+      .then((data) => {
+        // console.log("data", data);
+        dispatch(setCurrentOrder(data));
+        dispatch(setCurrentOrderId(orderId));
+        const longAddress = formatAddress(address);
+        dispatch(setCurrentAddress(longAddress));
+      })
+      .catch((error) => {
+        dispatch(setError(error.message));
+      });
+
+    navigate(paths.UPDATE);
+  };
   return (
     <li className={styles.orderItemList}>
       <div className={styles.orderItemBox}>
@@ -37,11 +53,7 @@ export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: Order
       </div>
       <div className={styles.orderBtnBox}>
         <ButtonGray
-          onClick={() => {
-            navigate(paths.UPDATE);
-            dispatch(setCurrentAddress(longAddress));
-            dispatch(setCurrentOrderId(orderId));
-          }}
+          onClick={handleEditOrder}
           title="Редактировать"
         />
         <ButtonRed onClick={handleDeleteOrder} title="Удалить" />

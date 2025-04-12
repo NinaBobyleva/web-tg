@@ -3,29 +3,29 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./basket.module.css";
 import { paths } from "../../paths";
-import { useEffect } from "react";
-import { getOrder } from "../../api/apiOrders";
+// import { useEffect } from "react";
+// import { getOrder } from "../../api/apiOrders";
 import { BasketCategories } from "../BasketCategories/BasketCategories";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setError, setOrder } from "../../store/features/materialsSlice";
+import { useAppSelector } from "../../store/store";
+// import { setError, setOrder } from "../../store/features/materialsSlice";
 import { EditOrderBlock } from "../EditOrderBlock/EditOrderBlock";
 
 export const Basket = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { order, error } = useAppSelector((state) => state.materials);
   console.log("order", order);
   const id = 33;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getOrder({ id })
-      .then((data) => {
-        dispatch(setOrder(data.materials_by_category));
-      })
-      .catch((error) => {
-        dispatch(setError(error.message));
-      });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   getOrder({ id })
+  //     .then((data) => {
+  //       dispatch(setOrder(data.materials_by_category));
+  //     })
+  //     .catch((error) => {
+  //       dispatch(setError(error.message));
+  //     });
+  // }, [dispatch]);
   return (
     <>
       <EditOrderBlock />

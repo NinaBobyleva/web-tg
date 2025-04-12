@@ -26,7 +26,7 @@ export const EditOrderBlock = () => {
       <h1 className={styles.title}>Редактирование заказа №{currentOrderId}</h1>
       <div className={styles.inputBox}>
         <span>Адрес:</span>
-        <Input type="text" value={currentAddress} />
+        <Input type="text" value={currentAddress && currentAddress} />
       </div>
       <div className={styles.buttonBox}>
         <ButtonRed

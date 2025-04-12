@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AddressType, CategoriesBasketType, CategoriesType, OrdersType } from "../../types/types";
+import { AddressType, CategoriesBasketType, CategoriesType, CurrentOrderType, OrdersType } from "../../types/types";
 import { setUser } from "./userSlice";
 
 type SeminarsStateType = {
   categories: CategoriesType[];
   order: CategoriesBasketType[];
+  currentOrder: CurrentOrderType[];
   orders: OrdersType[];
   userOrders: OrdersType[];
   addresses: AddressType[];
@@ -18,6 +19,7 @@ type SeminarsStateType = {
 const initialState: SeminarsStateType = {
   categories: [],
   order: [],
+  currentOrder: [],
   orders: [],
   userOrders: [],
   addresses: [],
@@ -35,8 +37,13 @@ const materialsSlice = createSlice({
     setCategories: (state, action: PayloadAction<[]>) => {
       state.categories = action.payload;
     },
-    setOrder: (state, action: PayloadAction<[]>) => {
+    setOrder: (state, action: PayloadAction<CategoriesBasketType[]>) => {
       state.order = action.payload;
+    },
+    setCurrentOrder: (state, action: PayloadAction<CurrentOrderType[]>) => {
+      state.currentOrder = action.payload;
+      // state.currentOrderId = action.payload.find((el) => console.log(el));
+      // state.currentAddress = action.payload.find((el) => el.address);
     },
     setIsLoad: (state, action: PayloadAction<boolean>) => {
       state.isLoad = action.payload;
@@ -70,6 +77,7 @@ const materialsSlice = createSlice({
 export const {
   setCategories,
   setOrder,
+  setCurrentOrder,
   setIsLoad,
   setCurrentOrderId,
   setError,
