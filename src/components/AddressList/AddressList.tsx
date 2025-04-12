@@ -1,39 +1,34 @@
+import { formatAddress } from "../../helpers/formatAddress";
+import { AddressType } from "../../types/types";
 import styles from "./addressList.module.css";
 
 type AddressListProp = {
-  city: string;
-  street: string;
-  house: string;
-  building: string;
-  office: string;
-  floor: string;
+  address: AddressType;
   id: number;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setAddressId: React.Dispatch<React.SetStateAction<number>>;
+  setInputValueAddress: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const AddressList = ({
-  city,
-  street,
-  house,
-  building,
-  office,
-  floor,
+  address,
   id,
   setIsOpen,
   setAddressId,
+  setInputValueAddress
 }: AddressListProp) => {
+  const longAddress = formatAddress(address);
   return (
     <li className={styles.addressListBox}>
       <div
         onClick={() => {
           setIsOpen(false);
+          setInputValueAddress(longAddress);
           setAddressId(id);
         }}
       >
         <span>
-          {city}, {street}, {house}
-          {building}, {office}, {floor}
+          {longAddress}
         </span>
       </div>
     </li>
