@@ -1,13 +1,15 @@
 import styles from "./buttonGray.module.css";
+import classNames from "classnames";
 
 type ButtonGrayProp = {
   title: string;
+  isDisabled?: boolean;
   onClick?: () => void;
 };
 
-export const ButtonGray = ({ title, onClick }: ButtonGrayProp) => {
+export const ButtonGray = ({ title, isDisabled, onClick }: ButtonGrayProp) => {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button disabled={isDisabled} className={classNames(isDisabled ? styles.buttonDisabled : styles.button)} onClick={onClick}>
       {title}
     </button>
   );
