@@ -9,14 +9,18 @@ export const Header = () => {
   const { tgWebAppData } = retrieveLaunchParams();
   console.log("launchParams", tgWebAppData);
 
-  const data = JSON.stringify({
+  const data1 = JSON.stringify({
     eventType: 'web_app_setup_back_button',
     eventData: {
       is_visible: true,
     },
   });
   
-  window.parent.postMessage(data, 'https://t.me/KRorder_bot/KR_order');
+  window.parent.postMessage(data1, 'https://web.telegram.org');
+
+  const data = JSON.stringify({ is_visible: true });
+
+  window.TelegramWebviewProxy.postEvent("web_app_setup_back_button", data);
 
   return (
     <div className={styles.header}>
