@@ -17,9 +17,12 @@ export const EditOrderBlock = () => {
   const handleDeleteOrder = useDeleteOrder({ id: currentOrderId });
   return (
     <div className={styles.editBlock}>
-      {isActiveModal && <div className={styles.imageBox}>
-        <p className={styles.modalTitle}>Заказ удален</p>
-        </div>}
+      {isActiveModal && (
+        <div className={styles.modalBox}>
+          <p className={styles.modalTitle}>Заказ удален</p>
+          <img className={styles.modalImg} src="./img/icons-completed.svg" alt="completed" />
+        </div>
+      )}
       <h1 className={styles.title}>Редактирование заказа №{currentOrderId}</h1>
       <div className={styles.inputBox}>
         <span>Адрес:</span>

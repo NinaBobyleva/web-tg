@@ -6,7 +6,7 @@ import { paths } from "../../paths";
 
 export const Header = () => {
   const { tgWebAppData } = retrieveLaunchParams();
-  console.log("launchParams", tgWebAppData);
+  // console.log("launchParams", tgWebAppData);
   const navigate = useNavigate();
 
   return (
