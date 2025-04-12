@@ -81,7 +81,7 @@ export type newOrder = {
 
 export interface OrderItem {
   material: string;
-  quantity: number;
+  quantity: number | null;
 }
 
 export interface OrderRequest {

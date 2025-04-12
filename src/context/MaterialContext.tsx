@@ -17,9 +17,7 @@ export const MaterialsProvider = ({ children }: { children: React.ReactNode }) =
   const [materials, setMaterials] = useState<MaterialItem[]>([]);
 
   const addMaterial = (material: MaterialItem) => {
-    // console.log(material.material);
     const a = materials.find((el) => el.material === material.material);
-    // console.log(a);
     if (!a) {
         setMaterials((prev) => [...prev, material]);
     }

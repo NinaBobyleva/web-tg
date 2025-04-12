@@ -70,3 +70,5 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
     </div>
   );
 };
+
+// web_app_setup_back_button
