@@ -1,8 +1,8 @@
 import { AppRoutes } from "./AppRoutes";
-import { useMockTelegramEnv } from "./hooks/useMockTelegramEnv";
+// import { useMockTelegramEnv } from "./hooks/useMockTelegramEnv";
 
 function App() {
-  useMockTelegramEnv();
+  // useMockTelegramEnv();
 
   return <AppRoutes />;
 }
