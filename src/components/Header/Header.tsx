@@ -1,6 +1,7 @@
 import styles from "./header.module.css";
 import { ButtonGray } from "../ButtonGray/ButtonGray";
 import { retrieveLaunchParams } from "@telegram-apps/bridge";
+import { init, backButton } from '@telegram-apps/sdk';
 import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 
@@ -9,14 +10,13 @@ export const Header = () => {
   const { tgWebAppData } = retrieveLaunchParams();
   console.log("launchParams", tgWebAppData);
 
-  const data1 = JSON.stringify({
-    eventType: 'web_app_setup_back_button',
-    eventData: {
-      is_visible: true,
-    },
+  init();
+  backButton.mount();
+
+  const off = backButton.onClick(() => {
+    off();
+    window.history.back();
   });
-  
-  window.parent.postMessage(data1, 'https://t.me/KRorder_bot/KR_order');
 
   return (
     <div className={styles.header}>
