@@ -6,7 +6,9 @@ import { Categories } from "../Categories/Categories";
 import { Link } from "react-router-dom";
 import { paths } from "../../paths";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setCategories, setIsLoad } from "../../store/features/materialsSlice";
+import { setCategories, setCurrentOrder, setIsLoad } from "../../store/features/materialsSlice";
+import { useMaterials } from "../../context/MaterialContext";
+import { postOrderItem } from "../../api/apiOrderItems";
 
 export const DirectoryOrders = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +16,25 @@ export const DirectoryOrders = () => {
   // console.log("categories", categories);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
+  const orderId = useAppSelector((state) => state.materials.currentOrderId);
+  const { materials } = useMaterials();
+  // console.log("materials", materials);
+
+  const handleSubmitMaterials = () => {
+    const payload = {
+      order: orderId,
+      order_items: materials
+    };
+    postOrderItem(payload)
+      .then((data) => {
+        dispatch(setCurrentOrder(data))
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+  };
 
   const handleCategoryOpen = (categoryName: string) => {
     setActiveCategory((prev) => (prev === categoryName ? null : categoryName));
@@ -33,11 +54,12 @@ export const DirectoryOrders = () => {
         dispatch(setIsLoad(false));
       });
   }, [dispatch]);
+
   return (
     <div>
       <h2 className={styles.title}>Выбрать из справочника</h2>
       <div className={styles.buttonBox}>
-        <ButtonGray title="Добавить выбранное" />
+        <ButtonGray onClick={handleSubmitMaterials} title="Добавить выбранное" />
         <Link to={paths.BASKET}>
           <img className={styles.img} src="./img/basket.svg" alt="" />
         </Link>

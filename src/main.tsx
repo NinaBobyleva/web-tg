@@ -4,13 +4,16 @@ import "./globals.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import ReduxProvider from "./store/ReduxProvider.tsx";
+import { MaterialsProvider } from "./context/MaterialContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ReduxProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ReduxProvider>
+    <MaterialsProvider>
+      <ReduxProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ReduxProvider>
+    </MaterialsProvider>
   </StrictMode>,
 );

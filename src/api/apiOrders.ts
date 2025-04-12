@@ -1,4 +1,4 @@
-import { newOrder } from "../types/types";
+import { CurrentOrderType, newOrder } from "../types/types";
 
 const ORDERS_URL = "https://dev.kr-order.ru/api/orders/";
 
@@ -49,7 +49,7 @@ export const postOrder = async (newOrder: newOrder) => {
   return response;
 };
 
-export const deleteOrder = async ({id}: {id: number}) => {
+export const deleteOrder = async ({id}: {id: number | CurrentOrderType | undefined}) => {
   const res = await fetch(ORDERS_URL + `${id}/`, {
     method: "DELETE",
     headers: {

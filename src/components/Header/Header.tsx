@@ -5,9 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 
 export const Header = () => {
+  const navigate = useNavigate();
   const { tgWebAppData } = retrieveLaunchParams();
   console.log("launchParams", tgWebAppData);
-  const navigate = useNavigate();
+
+  const data = JSON.stringify({
+    eventType: 'web_app_setup_back_button',
+    eventData: {
+      is_visible: true,
+    },
+  });
+  
+  window.parent.postMessage(data, 'https://t.me/KRorder_bot/KR_order');
 
   return (
     <div className={styles.header}>

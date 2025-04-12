@@ -31,6 +31,15 @@ export type CategoriesBasketType = {
   name: string;
 };
 
+export type CurrentOrderType = {
+  id: number;
+  user: UserType[];
+  address: AddressType[];
+  materials_by_category: [];
+  status: string;
+  date_of_delivery: string;
+};
+
 export type MaterialsBasketType = {
   default_shop: number;
   id: number;
@@ -69,3 +78,13 @@ export type newOrder = {
   comment: string;
   date_of_delivery: string;
 };
+
+export interface OrderItem {
+  material: string;
+  quantity: number | null;
+}
+
+export interface OrderRequest {
+  order: number;
+  order_items: OrderItem[];
+}
