@@ -18,10 +18,6 @@ export const Header = () => {
   
   window.parent.postMessage(data1, 'https://web.telegram.org');
 
-  const data = JSON.stringify({ is_visible: true });
-
-  window.TelegramWebviewProxy.postEvent("web_app_setup_back_button", data);
-
   return (
     <div className={styles.header}>
       <div className={styles.orderBox}>
