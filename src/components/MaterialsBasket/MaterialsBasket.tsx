@@ -1,9 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import styles from "./materialsBasket.module.css";
-import { deleteOrderItem, editOrderItem, getOrder } from "../../api/apiMaterials";
+import { deleteOrderItem, editOrderItem } from "../../api/apiMaterials";
 import { useAppDispatch } from "../../store/store";
 import { setOrder } from "../../store/features/materialsSlice";
+import { getOrder } from "../../api/apiOrders";
 
 type MaterialsBasketProp = {
   title: string;

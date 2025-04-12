@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import styles from "./materials.module.css";
+import { Link } from "react-router-dom";
 
 type MaterialsProp = {
   name: string;
@@ -8,10 +9,15 @@ type MaterialsProp = {
   img_l: string;
   isActiveMaterial: boolean;
   handleImageOpen: (materialName: string) => void;
+  url: string;
 };
 
-export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen }: MaterialsProp) => {
+export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen, url }: MaterialsProp) => {
   const [quantity, setQuantity] = useState<number>(0);
+
+  if (!url) {
+    return;
+  }
 
   return (
     <div className={styles.li}>
@@ -19,7 +25,12 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
         <div className={styles.imageBox}>
           <img className={styles.image} src={img_l} alt="material" />
           <p className={styles.imageName}>{name}</p>
-          <img onClick={() => handleImageOpen("")} className={styles.imageClose} src="./img/close.svg" alt="close" />
+          <div className={styles.imageCloseBox}>
+            <Link to={url}>
+              <p>Ссылка на товар</p>
+            </Link>
+            <img onClick={() => handleImageOpen("")} className={styles.imageClose} src="./img/close.svg" alt="close" />
+          </div>
         </div>
       ) : null}
       <li className={styles.materialsBox}>

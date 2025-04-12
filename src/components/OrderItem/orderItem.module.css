@@ -1,0 +1,26 @@
+.orderItemList {
+  padding: 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #000;
+}
+
+.orderItem {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+}
+
+.orderItemId {
+  font-weight: 600;
+}
+
+.orderItemAddress {
+  font-weight: 600;
+}
+
+.orderBtnBox {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}

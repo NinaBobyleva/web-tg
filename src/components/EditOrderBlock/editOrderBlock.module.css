@@ -1,11 +1,30 @@
 .editBlock {
   border-bottom: 0.5px solid #8f8e8e;
+  position: relative;
+}
+
+.imageBox {
+  border-radius: 15px;
+  background: #fff;
+  position: absolute;
+  top: 150px;
+  left: 60px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalTitle {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 60px 80px;
 }
 
 .title {
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 28px;
+  font-size: 26px;
 }
 
 .inputBox {

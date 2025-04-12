@@ -14,12 +14,10 @@
 
 .element {
   position: relative;
-  /* transition: transform 0.2s; */
 }
 
 .elementOpen {
   position: relative;
-  /* transition: transform 0.2s; */
   transform: rotate(90deg);
 }
 

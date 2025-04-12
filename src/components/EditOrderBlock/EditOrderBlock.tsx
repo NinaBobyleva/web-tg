@@ -1,30 +1,42 @@
 import { useNavigate } from "react-router-dom";
-import { deleteOrder } from "../../api/apiMaterials";
 // import { useAppDispatch } from "../../store/store";
 import { ButtonRed } from "../ButtonRed/ButtonRed";
 import { Input } from "../Input/Input";
 import styles from "./editOrderBlock.module.css";
 import { paths } from "../../paths";
+import { useAppSelector } from "../../store/store";
+import { useDeleteOrder } from "../../hooks/useDeleteOrder";
+import { useState } from "react";
 
 export const EditOrderBlock = () => {
   // const dispatch = useAppDispatch();
+  const { currentAddress, currentOrderId } = useAppSelector((state) => state.materials);
+  const [isActiveModal, setIsActiveModal] = useState(false);
   const navigate = useNavigate();
-  const id = 38;
-  const handleDeleteOrder = () => {
-    deleteOrder({ id }).then((res) => res);
-  };
+
+  const handleDeleteOrder = useDeleteOrder({ id: currentOrderId });
   return (
     <div className={styles.editBlock}>
-      <h1 className={styles.title}>Редактирование заказа №{id}</h1>
+      {isActiveModal && <div className={styles.imageBox}>
+        <p className={styles.modalTitle}>Заказ удален</p>
+        </div>}
+      <h1 className={styles.title}>Редактирование заказа №{currentOrderId}</h1>
       <div className={styles.inputBox}>
         <span>Адрес:</span>
-        <Input type="text" />
+        <Input type="text" value={currentAddress} />
       </div>
       <div className={styles.buttonBox}>
-        <ButtonRed onClick={() => {
-          handleDeleteOrder();
-          navigate(paths.HOME);
-        }} title="Удалить заказ" />
+        <ButtonRed
+          onClick={() => {
+            handleDeleteOrder();
+            setIsActiveModal(true);
+            setTimeout(() => {
+              setIsActiveModal(false);
+              navigate(paths.HOME);
+            }, 1500);
+          }}
+          title="Удалить заказ"
+        />
       </div>
     </div>
   );

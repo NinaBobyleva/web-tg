@@ -9,6 +9,8 @@ export type MaterialsType = {
   image_thumbnail_url: string;
   image_large_url: string;
   name: string;
+  category: number;
+  url: string;
 };
 
 export type OrdersType = {
@@ -16,10 +18,11 @@ export type OrdersType = {
   comment: null;
   created_at: string;
   id: number;
-  materials_by_category: CategoriesBasketType[];
   status: string;
   updated_at: string;
   user: UserType;
+  items_count: number;
+  total_quantity: number;
 };
 
 export type CategoriesBasketType = {
@@ -52,4 +55,17 @@ export type AddressType = {
 
 export type UserType = {
   email: string;
+  first_name: string;
+  id: number;
+  last_name: string;
+  telegram_id: number;
+  telegram_username: string;
+};
+
+export type newOrder = {
+  address: number;
+  user: number | undefined;
+  status: string;
+  comment: string;
+  date_of_delivery: string;
 };

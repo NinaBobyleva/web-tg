@@ -1,6 +1,6 @@
 .title {
   padding-top: 15px;
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .formBox {
@@ -15,16 +15,24 @@
   gap: 10px;
 }
 
-.input {
-  width: 40px;
-  border-radius: 10px;
+.inputMaterial {
+  width: 230px;
+  border-radius: 5px;
   border: 0.5px solid;
   outline: none;
   padding: 3px 5px;
 }
 
-.input[type="number"]::-webkit-outer-spin-button,
-.input[type="number"]::-webkit-inner-spin-button {
+.inputQuantity {
+  width: 30px;
+  border-radius: 5px;
+  border: 0.5px solid;
+  outline: none;
+  padding: 3px 5px;
+}
+
+.inputQuantity[type="number"]::-webkit-outer-spin-button,
+.inputQuantity[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

@@ -31,8 +31,8 @@ export const useMockTelegramEnv = () => {
           "user",
           JSON.stringify({
             id: 1,
-            first_name: "Pavel",
-            username: "bobyleva_nina",
+            first_name: "Nina",
+            username: "test1@test1.ru",
           }),
         ],
         ["hash", ""],
