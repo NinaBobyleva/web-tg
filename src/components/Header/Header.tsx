@@ -16,7 +16,7 @@ export const Header = () => {
     },
   });
   
-  window.parent.postMessage(data1, 'https://web.telegram.org');
+  window.parent.postMessage(data1, 'https://t.me/KRorder_bot/KR_order');
 
   return (
     <div className={styles.header}>
