@@ -3,6 +3,14 @@ import { Button } from "../Button/Button";
 import styles from "./materials.module.css";
 import { Link } from "react-router-dom";
 import { useMaterials } from "../../context/MaterialContext";
+import { on, postEvent } from "@telegram-apps/bridge";
+
+postEvent("web_app_setup_back_button", { is_visible: true });
+
+const off = on("back_button_pressed", () => {
+  postEvent("web_app_setup_back_button", { is_visible: false });
+  off();
+});
 
 type MaterialsProp = {
   name: string;
@@ -26,7 +34,7 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
     const validatedQuantity = Math.max(0, newQuantity);
     setQuantity(validatedQuantity);
 
-    addMaterial({ material: name, quantity: validatedQuantity});
+    addMaterial({ material: name, quantity: validatedQuantity });
 
     // Обновляем материал в общем состоянии
     updateMaterial(name, validatedQuantity);
@@ -55,10 +63,13 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
           <div className={styles.buttonQuantityBox}>
             <Button onClick={() => handleQuantityChange(quantity - 1)} title="-" />
             <input type="number" className={styles.input} defaultValue={quantity === 0 ? "" : quantity} />
-            <Button onClick={() => {
-              handleQuantityChange(quantity + 1)
-              console.log(index);
-            }} title="+" />
+            <Button
+              onClick={() => {
+                handleQuantityChange(quantity + 1);
+                console.log(index);
+              }}
+              title="+"
+            />
           </div>
           <div onClick={() => handleImageOpen(name)} className={styles.materialBtn}>
             <div className={styles.btn}></div>
