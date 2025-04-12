@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./createOrder.module.css";
-import { getAllAddresses } from "../../api/apiMaterials";
+import { getAllAddresses } from "../../api/apiAddresses";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import {
   setAddresses,

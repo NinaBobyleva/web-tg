@@ -38,7 +38,7 @@ export type CurrentOrderType = {
   materials_by_category: [];
   status: string;
   date_of_delivery: string;
-}
+};
 
 export type MaterialsBasketType = {
   default_shop: number;
@@ -78,3 +78,13 @@ export type newOrder = {
   comment: string;
   date_of_delivery: string;
 };
+
+export interface OrderItem {
+  material: string;
+  quantity: number;
+}
+
+export interface OrderRequest {
+  order: number;
+  order_items: OrderItem[];
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "../Button/Button";
 import styles from "./materials.module.css";
 import { Link } from "react-router-dom";
+import { useMaterials } from "../../context/MaterialContext";
 
 type MaterialsProp = {
   name: string;
@@ -10,14 +11,26 @@ type MaterialsProp = {
   isActiveMaterial: boolean;
   handleImageOpen: (materialName: string) => void;
   url: string;
+  index: number;
 };
 
-export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen, url }: MaterialsProp) => {
+export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen, url, index }: MaterialsProp) => {
+  const { addMaterial, updateMaterial } = useMaterials();
   const [quantity, setQuantity] = useState<number>(0);
 
   if (!url) {
     return;
   }
+
+  const handleQuantityChange = (newQuantity: number) => {
+    const validatedQuantity = Math.max(0, newQuantity);
+    setQuantity(validatedQuantity);
+
+    addMaterial({ material: name, quantity: validatedQuantity});
+
+    // Обновляем материал в общем состоянии
+    updateMaterial(name, validatedQuantity);
+  };
 
   return (
     <div className={styles.li}>
@@ -40,9 +53,12 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
         </div>
         <div className={styles.buttonBox}>
           <div className={styles.buttonQuantityBox}>
-            <Button onClick={() => quantity !== 0 && setQuantity(quantity - 1)} title="-" />
+            <Button onClick={() => handleQuantityChange(quantity - 1)} title="-" />
             <input type="number" className={styles.input} defaultValue={quantity === 0 ? "" : quantity} />
-            <Button onClick={() => setQuantity(quantity + 1)} title="+" />
+            <Button onClick={() => {
+              handleQuantityChange(quantity + 1)
+              console.log(index);
+            }} title="+" />
           </div>
           <div onClick={() => handleImageOpen(name)} className={styles.materialBtn}>
             <div className={styles.btn}></div>
