@@ -47,8 +47,9 @@ const materialsSlice = createSlice({
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    setOrders: (state, action: PayloadAction<[]>) => {
+    setOrders: (state, action: PayloadAction<OrdersType[]>) => {
       state.orders = action.payload;
+      state.userOrders = action.payload.filter((el) => el.user !== null && el.user.id === state.userId);
     },
     setAddresses: (state, action: PayloadAction<[]>) => {
       state.addresses = action.payload;
@@ -56,16 +57,14 @@ const materialsSlice = createSlice({
     setCurrentAddress: (state, action: PayloadAction<string>) => {
       state.currentAddress = action.payload;
     },
-    setUserOrders: (state) => {
-      const newListUserOrders = state.orders.filter((el) => el.user !== null && el.user.id === state.userId);
-      state.userOrders = newListUserOrders;
+    setUserOrders: () => {
     },
   },
   extraReducers: (builder) => {
     builder.addCase(setUser, (state, action) => {
       state.userId = action?.payload?.id;
-    })
-  }
+    });
+  },
 });
 
 export const {

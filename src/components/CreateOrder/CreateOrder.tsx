@@ -3,11 +3,11 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./createOrder.module.css";
 import { getAllAddresses } from "../../api/apiMaterials";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setAddresses, setCurrentAddress, setCurrentOrderId } from "../../store/features/materialsSlice";
+import { setAddresses, setCurrentAddress, setCurrentOrderId, setOrders } from "../../store/features/materialsSlice";
 import { AddressList } from "../AddressList/AddressList";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
-import { postOrder } from "../../api/apiOrders";
+import { getOrders, postOrder } from "../../api/apiOrders";
 import { newOrder } from "../../types/types";
 
 export const CreateOrder = ({user}: {user: number | undefined}) => {
@@ -22,7 +22,7 @@ export const CreateOrder = ({user}: {user: number | undefined}) => {
   //   console.log("addresses", addresses);
   const [inputValueDate, setInputValueDate] = useState("");
 
-  const handleAddNewOrder = () => {
+  const handleAddNewOrder = async () => {
     const newOrder: newOrder = {
       address: addressId,
       user: user,
@@ -33,11 +33,18 @@ export const CreateOrder = ({user}: {user: number | undefined}) => {
 
     // console.log(newOrder);
 
-    postOrder(newOrder)
-    .then((date) => {
-      dispatch(setCurrentOrderId(date.id));
-      // dispatch(setUserOrders());
+    await postOrder(newOrder)
+    .then((data) => {
+      dispatch(setCurrentOrderId(data.id));
     })
+    .catch((error) => {
+      console.log(error);
+    })
+
+    await getOrders()
+    .then((res) => {
+      dispatch(setOrders(res.results));
+    });
 
     navigate(paths.UPDATE);
   }

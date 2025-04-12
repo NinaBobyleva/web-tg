@@ -15,6 +15,7 @@ export const Orders = () => {
   const orders = useAppSelector((state) => state.materials.orders);
   // console.log("orders", orders);
   const user = useAppSelector((state) => state.user.user);
+  // const userOrders = useAppSelector((state) => state.materials.userOrders);
   const userOrders = orders.filter((el) => el.user !== null && el.user.id === user?.id);
   // console.log("userOrders", userOrders);
 
@@ -22,11 +23,14 @@ export const Orders = () => {
     getOrders()
       .then((data) => {
         dispatch(setOrders(data.results));
+        // dispatch(setUserOrders(userOrders));
       })
       .catch((error) => {
         dispatch(setError(error));
       });
+  }, [dispatch]);
 
+  useEffect(() => {
     const userData = {
       id: tgWebAppData?.user?.id,
       firstName: tgWebAppData?.user?.first_name,
@@ -36,7 +40,6 @@ export const Orders = () => {
 
     postUser(userData)
       .then((res) => {
-        console.log(res);
         dispatch(setUser(res));
       })
       .catch((error) => {

@@ -5,8 +5,8 @@ import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./orderItem.module.css";
 import { paths } from "../../paths";
 import { useAppDispatch } from "../../store/store";
-import { setCurrentAddress, setCurrentOrderId, setOrders, setUserOrders } from "../../store/features/materialsSlice";
-import { deleteOrder } from "../../api/apiOrders";
+import { setCurrentAddress, setCurrentOrderId } from "../../store/features/materialsSlice";
+import { useDeleteOrder } from "../../hooks/useDeleteOrder";
 
 type OrderItemProp = {
   orderId: number;
@@ -20,12 +20,7 @@ export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: Order
   const dispatch = useAppDispatch();
   const longAddress = `${address.city}, ${address.street}, ${address.house}${address.building}, ${address.office}, ${address.floor}`;
 
-  const handleDeleteOrder = () => {
-    deleteOrder({ id: orderId }).then((res) => {
-      dispatch(setOrders(res.results));
-      dispatch(setUserOrders());
-    });
-  };
+  const handleDeleteOrder = useDeleteOrder({id: orderId});
   return (
     <li className={styles.orderItemList}>
       <div className={styles.orderItemBox}>

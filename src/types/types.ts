@@ -9,6 +9,8 @@ export type MaterialsType = {
   image_thumbnail_url: string;
   image_large_url: string;
   name: string;
+  category: number;
+  url: string;
 };
 
 export type OrdersType = {
@@ -16,7 +18,6 @@ export type OrdersType = {
   comment: null;
   created_at: string;
   id: number;
-  // materials_by_category: CategoriesBasketType[];
   status: string;
   updated_at: string;
   user: UserType;

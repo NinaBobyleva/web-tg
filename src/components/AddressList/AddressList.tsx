@@ -27,7 +27,6 @@ export const AddressList = ({
     <li className={styles.addressListBox}>
       <div
         onClick={() => {
-          console.log(id);
           setIsOpen(false);
           setAddressId(id);
         }}

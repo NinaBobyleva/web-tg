@@ -39,6 +39,7 @@ export const Categories = ({
               handleImageOpen={handleImageOpen}
               img_t={el.image_thumbnail_url}
               img_l={el.image_large_url}
+              url={el.url}
             />
           ))}
       </ul>

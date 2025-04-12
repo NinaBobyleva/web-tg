@@ -29,7 +29,6 @@ export const getOrder = async ({ id }: { id: number }) => {
 };
 
 export const postOrder = async (newOrder: newOrder) => {
-  console.log(newOrder);
   const res = await fetch(ORDERS_URL, {
     method: "POST",
     body: JSON.stringify(newOrder),

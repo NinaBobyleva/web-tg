@@ -27,6 +27,11 @@
   text-align: center;
 }
 
+.imageCloseBox {
+  display: flex;
+  gap: 120px;
+}
+
 .imageClose {
   padding-bottom: 20px;
 }
