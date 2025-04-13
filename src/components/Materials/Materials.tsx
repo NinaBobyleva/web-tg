@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import styles from "./materials.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMaterials } from "../../context/MaterialContext";
-import { on, postEvent } from "@telegram-apps/bridge";
+import { BackButton } from "../BackButton/BackButton";
+// import { on, postEvent } from "@telegram-apps/bridge";
+import { init, backButton } from "@telegram-apps/sdk-react";
 
 type MaterialsProp = {
   name: string;
@@ -15,19 +17,25 @@ type MaterialsProp = {
   index: number;
 };
 
+init();
+
+// Mount the Back Button, so we will work with
+// the actual component properties.
+backButton.mount();
+
 export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen, url, index }: MaterialsProp) => {
   const { addMaterial, updateMaterial } = useMaterials();
   const [quantity, setQuantity] = useState<number>(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  postEvent("web_app_setup_back_button", { is_visible: true });
+  // postEvent("web_app_setup_back_button", { is_visible: true });
 
-  const off = on("back_button_pressed", () => {
-    // window.Telegram.WebApp.openLink("https://t.me/KRorder_bot/KR_order");
-    navigate("https://t.me/KRorder_bot/KR_order");
-    // postEvent("web_app_setup_back_button", { is_visible: false });
-    off();
-  });
+  // const off = on("back_button_pressed", () => {
+  //   // window.Telegram.WebApp.openLink("https://t.me/KRorder_bot/KR_order");
+  //   navigate("https://t.me/KRorder_bot/KR_order");
+  //   // postEvent("web_app_setup_back_button", { is_visible: false });
+  //   off();
+  // });
 
   if (!url) {
     return;
@@ -47,6 +55,7 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
     <div className={styles.li}>
       {isActiveMaterial ? (
         <div className={styles.imageBox}>
+          <BackButton />
           <img className={styles.image} src={img_l} alt="material" />
           <p className={styles.imageName}>{name}</p>
           <div className={styles.imageCloseBox}>
