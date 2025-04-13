@@ -23,8 +23,8 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
   postEvent("web_app_setup_back_button", { is_visible: true });
 
   const off = on("back_button_pressed", () => {
-    window.Telegram.WebApp.openLink("https://t.me/KRorder_bot/KR_order");
-    // navigate("https://t.me/KRorder_bot/KR_order");
+    // window.Telegram.WebApp.openLink("https://t.me/KRorder_bot/KR_order");
+    navigate("https://t.me/KRorder_bot/KR_order");
     // postEvent("web_app_setup_back_button", { is_visible: false });
     off();
   });
