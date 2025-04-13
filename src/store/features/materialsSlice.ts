@@ -5,7 +5,7 @@ import { setUser } from "./userSlice";
 type SeminarsStateType = {
   categories: CategoriesType[];
   order: CategoriesBasketType[];
-  currentOrder: CurrentOrderType[];
+  currentOrder: CurrentOrderType | null;
   orders: OrdersType[];
   userOrders: OrdersType[];
   addresses: AddressType[];
@@ -19,7 +19,7 @@ type SeminarsStateType = {
 const initialState: SeminarsStateType = {
   categories: [],
   order: [],
-  currentOrder: [],
+  currentOrder: null,
   orders: [],
   userOrders: [],
   addresses: [],
@@ -40,7 +40,7 @@ const materialsSlice = createSlice({
     setOrder: (state, action: PayloadAction<CategoriesBasketType[]>) => {
       state.order = action.payload;
     },
-    setCurrentOrder: (state, action: PayloadAction<CurrentOrderType[]>) => {
+    setCurrentOrder: (state, action: PayloadAction<CurrentOrderType | null>) => {
       state.currentOrder = action.payload;
       // state.currentOrderId = action.payload.find((el) => console.log(el));
       // state.currentAddress = action.payload.find((el) => el.address);

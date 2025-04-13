@@ -8,7 +8,6 @@ export const useDeleteOrder = ({id}: {id: number | CurrentOrderType | undefined}
   const handleDeleteOrder = async () => {
     deleteOrder({ id }).then((res) => {
       dispatch(setOrders(res.results));
-      // dispatch(setUserOrders());
     });
   };
 

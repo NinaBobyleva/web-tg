@@ -35,7 +35,7 @@ export type CurrentOrderType = {
   id: number;
   user: UserType[];
   address: AddressType[];
-  materials_by_category: [];
+  materials_by_category: CategoriesBasketType[];
   status: string;
   date_of_delivery: string;
 };
@@ -87,4 +87,8 @@ export interface OrderItem {
 export interface OrderRequest {
   order: number;
   order_items: OrderItem[];
+}
+
+export type StatusType = {
+  status: string;
 }
