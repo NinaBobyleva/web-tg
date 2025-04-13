@@ -23,7 +23,7 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
   postEvent("web_app_setup_back_button", { is_visible: true });
 
   const off = on("back_button_pressed", () => {
-    navigate(-1);
+    navigate("https://t.me/KRorder_bot/KR_order/update");
     // postEvent("web_app_setup_back_button", { is_visible: false });
     off();
   });
