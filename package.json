@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.6.1",
     "@telegram-apps/bridge": "^2.5.0",
     "@telegram-apps/sdk": "^3.5.3",
+    "@telegram-apps/sdk-react": "^3.2.0",
     "express": "^4.21.2",
     "http-proxy-middleware": "^3.0.3",
     "react": "^19.0.0",
