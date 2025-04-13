@@ -3,7 +3,7 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./directoryOrders.module.css";
 import { getAllMaterials } from "../../api/apiMaterials";
 import { Categories } from "../Categories/Categories";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCategories, setCurrentOrder, setIsLoad } from "../../store/features/materialsSlice";
@@ -12,6 +12,7 @@ import { postOrderItem } from "../../api/apiOrderItems";
 
 export const DirectoryOrders = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { categories, isLoad } = useAppSelector((state) => state.materials);
   // console.log("categories", categories);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -23,17 +24,17 @@ export const DirectoryOrders = () => {
   const handleSubmitMaterials = () => {
     const payload = {
       order: orderId,
-      order_items: materials
+      order_items: materials,
     };
     postOrderItem(payload)
       .then((data) => {
-        dispatch(setCurrentOrder(data))
+        dispatch(setCurrentOrder(data));
       })
       .catch((error) => {
         console.log(error);
       });
 
-
+    navigate(paths.BASKET);
   };
 
   const handleCategoryOpen = (categoryName: string) => {

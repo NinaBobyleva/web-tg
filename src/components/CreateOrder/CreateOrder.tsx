@@ -49,6 +49,7 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
       .then((data) => {
         dispatch(setCurrentOrderId(data.id));
         dispatch(setCurrentOrder(data));
+        console.log(data);
         const longAddress = formatAddress(data.address);
         dispatch(setCurrentAddress(longAddress));
         dispatch(setCurrentOrderId(data.id));

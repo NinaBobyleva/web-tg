@@ -1,7 +1,6 @@
 import styles from "./header.module.css";
 import { ButtonGray } from "../ButtonGray/ButtonGray";
-import { retrieveLaunchParams } from "@telegram-apps/bridge";
-// import { init, backButton } from '@telegram-apps/sdk';
+import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 
@@ -18,7 +17,7 @@ export const Header = () => {
         </Link>
         <div className={styles.btnBox}>
           <ButtonGray onClick={() => navigate(paths.HOME)} title="Мои заказы" />
-          <ButtonGray title="Выйти" />
+          {/* <ButtonGray title="Выйти" /> */}
         </div>
       </div>
       <div className={styles.loginBox}>

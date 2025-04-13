@@ -1,4 +1,4 @@
-import { CurrentOrderType, newOrder } from "../types/types";
+import { CurrentOrderType, newOrder, StatusType } from "../types/types";
 
 const ORDERS_URL = "https://dev.kr-order.ru/api/orders/";
 
@@ -32,6 +32,27 @@ export const postOrder = async (newOrder: newOrder) => {
   const res = await fetch(ORDERS_URL, {
     method: "POST",
     body: JSON.stringify(newOrder),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (res.status === 500) {
+    throw new Error("Сервер устал, попробуйте еще раз");
+  }
+
+  if (!res.ok) {
+    throw new Error("Что-то пошло не так");
+  }
+
+  const response = await res.json();
+  return response;
+};
+
+export const editOrder = async ({ id, status }: { id: number, status: StatusType }) => {
+  const res = await fetch(ORDERS_URL + `${id}/`, {
+    method: "PATCH",
+    body: JSON.stringify(status),
     headers: {
       "Content-Type": "application/json",
     },
