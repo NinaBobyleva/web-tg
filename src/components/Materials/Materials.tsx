@@ -1,16 +1,9 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import styles from "./materials.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMaterials } from "../../context/MaterialContext";
 import { on, postEvent } from "@telegram-apps/bridge";
-
-postEvent("web_app_setup_back_button", { is_visible: true });
-
-const off = on("back_button_pressed", () => {
-  postEvent("web_app_setup_back_button", { is_visible: false });
-  off();
-});
 
 type MaterialsProp = {
   name: string;
@@ -25,6 +18,15 @@ type MaterialsProp = {
 export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen, url, index }: MaterialsProp) => {
   const { addMaterial, updateMaterial } = useMaterials();
   const [quantity, setQuantity] = useState<number>(0);
+  const navigate = useNavigate();
+
+  postEvent("web_app_setup_back_button", { is_visible: true });
+
+  const off = on("back_button_pressed", () => {
+    navigate(-1);
+    // postEvent("web_app_setup_back_button", { is_visible: false });
+    off();
+  });
 
   if (!url) {
     return;
