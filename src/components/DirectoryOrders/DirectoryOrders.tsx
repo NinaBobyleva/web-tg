@@ -18,14 +18,25 @@ export const DirectoryOrders = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
   const orderId = useAppSelector((state) => state.materials.currentOrderId);
+  const [isDisabled, setIsDisabled] = useState(true);
   const { materials } = useMaterials();
   // console.log("materials", materials);
+
+  useEffect(() => {
+    if (materials.length !== 0) {
+      setIsDisabled(false);
+    }
+  }, [materials]);
 
   const handleSubmitMaterials = () => {
     const payload = {
       order: orderId,
       order_items: materials,
     };
+
+    if (!payload) {
+      return;
+    }
     postOrderItem(payload)
       .then((data) => {
         dispatch(setCurrentOrder(data));
@@ -60,7 +71,7 @@ export const DirectoryOrders = () => {
     <div>
       <h2 className={styles.title}>Выбрать из справочника</h2>
       <div className={styles.buttonBox}>
-        <ButtonGray onClick={handleSubmitMaterials} title="Добавить выбранное" />
+        <ButtonGray isDisabled={isDisabled} onClick={handleSubmitMaterials} title="Добавить выбранное" />
         <Link to={paths.BASKET}>
           <img className={styles.img} src="./img/basket.svg" alt="" />
         </Link>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./addMaterialsBlock.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -10,6 +10,7 @@ export const AddMaterialsBlock = () => {
   const [isActiveModal, setIsActiveModal] = useState(false);
   const [error, setError] = useState("");
   const orderId = useAppSelector((state) => state.materials.currentOrderId);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
     material: "",
     quantity: "",
@@ -20,8 +21,18 @@ export const AddMaterialsBlock = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
+  useEffect(() => {
+    if (inputValue.material.length !== 0 && inputValue.quantity.length !== 0) {
+      setIsDisabled(false);
+    }
+  }, [inputValue]);
+
   const handleAddInputOrder = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (!orderId) {
+      return;
+    }
     const newOrder = [
       {
         material: inputValue.material,
@@ -40,10 +51,10 @@ export const AddMaterialsBlock = () => {
         setIsActiveModal(true);
         setTimeout(() => {
           setIsActiveModal(false);
-        }, 2000)
+        }, 2000);
       })
       .catch((error) => {
-        setError(error)
+        setError(error);
       });
     setInputValue({
       material: "",
@@ -76,7 +87,7 @@ export const AddMaterialsBlock = () => {
             type="number"
           />
         </div>
-        <ButtonGray onClick={handleAddInputOrder} title="Добавить" />
+        <ButtonGray isDisabled={isDisabled} onClick={handleAddInputOrder} title="Добавить" />
       </div>
       {error && <p className={styles.error}>{error}</p>}
     </div>
