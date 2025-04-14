@@ -25,15 +25,17 @@ export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: Order
   const handleEditOrder = () => {
     getOrder({ id: orderId })
       .then((data) => {
-        console.log("data", data);
         dispatch(setCurrentOrder(data));
         dispatch(setCurrentOrderId(orderId));
         const longAddress = formatAddress(address);
         dispatch(setCurrentAddress(longAddress));
       })
       .catch((error) => {
-        dispatch(setError(error));
-      });
+        dispatch(setError(error.message));
+      })
+      .finally(() => {
+        dispatch(setError(""));
+      })
 
     navigate(paths.UPDATE);
   };

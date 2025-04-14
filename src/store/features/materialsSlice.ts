@@ -42,8 +42,6 @@ const materialsSlice = createSlice({
     },
     setCurrentOrder: (state, action: PayloadAction<CurrentOrderType | null>) => {
       state.currentOrder = action.payload;
-      // state.currentOrderId = action.payload.find((el) => console.log(el));
-      // state.currentAddress = action.payload.find((el) => el.address);
     },
     setIsLoad: (state, action: PayloadAction<boolean>) => {
       state.isLoad = action.payload;

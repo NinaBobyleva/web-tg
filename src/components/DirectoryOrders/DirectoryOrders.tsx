@@ -13,7 +13,7 @@ import { postOrderItem } from "../../api/apiOrderItems";
 export const DirectoryOrders = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { categories, isLoad, error } = useAppSelector((state) => state.materials);
+  const { categories, isLoad } = useAppSelector((state) => state.materials);
   // console.log("categories", categories);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
@@ -43,8 +43,11 @@ export const DirectoryOrders = () => {
         setMaterials([]);
       })
       .catch((error) => {
-        dispatch(setError(error));
-      });
+        dispatch(setError(error.message));
+      })
+      .finally(() => {
+        dispatch(setError(""));
+      })
 
     navigate(paths.BASKET);
   };
@@ -61,10 +64,11 @@ export const DirectoryOrders = () => {
         dispatch(setCategories(data.results));
       })
       .catch((error) => {
-        dispatch(setError(error));
+        dispatch(setError(error.message));
       })
       .finally(() => {
         dispatch(setIsLoad(false));
+        dispatch(setError(""));
       });
   }, [dispatch]);
 
@@ -73,7 +77,6 @@ export const DirectoryOrders = () => {
       <h2 className={styles.title}>Выбрать из справочника</h2>
       <div className={styles.buttonBox}>
         <ButtonGray isDisabled={isDisabled} onClick={handleSubmitMaterials} title="Добавить выбранное" />
-        {error && <p className={styles.error}>{error}</p>}
         <Link to={paths.BASKET}>
           <img className={styles.img} src="./img/basket.svg" alt="" />
         </Link>

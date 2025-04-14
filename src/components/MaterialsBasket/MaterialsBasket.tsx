@@ -3,7 +3,7 @@ import { Button } from "../Button/Button";
 import styles from "./materialsBasket.module.css";
 import { deleteOrderItem, editOrderItem } from "../../api/apiOrderItems";
 import { useAppDispatch } from "../../store/store";
-import { setError, setOrder } from "../../store/features/materialsSlice";
+import { setCurrentOrder, setError } from "../../store/features/materialsSlice";
 import { getOrder } from "../../api/apiOrders";
 
 type MaterialsBasketProp = {
@@ -15,6 +15,7 @@ type MaterialsBasketProp = {
 };
 
 export const MaterialsBasket = ({ title, img, quantity, id, orderId }: MaterialsBasketProp) => {
+  console.log(orderId);
   const [value, setValue] = useState(quantity.toString());
   const dispatch = useAppDispatch();
 
@@ -22,7 +23,10 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId }: Materials
     editOrderItem({ id, quantity: Number(value) })
     .then((res) => res)
     .catch((error) => {
-      dispatch(setError(error));
+      dispatch(setError(error.message));
+    })
+    .finally(() => {
+      dispatch(setError(""));
     })
   }, [value, id, dispatch]);
 
@@ -51,12 +55,20 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId }: Materials
   };
 
   const handleDeleteMaterial = async () => {
-    await deleteOrderItem({ id }).then();
+    console.log(id);
+    await deleteOrderItem({ id })
+    .then((res) => res)
+    .catch((error) => {
+      dispatch(setError(error.message));
+    })
     await getOrder({ id: orderId }).then((data) => {
-      dispatch(setOrder(data.materials_by_category));
+      dispatch(setCurrentOrder(data));
     })
     .catch((error) => {
-      dispatch(setError(error));
+      dispatch(setError(error.message));
+    })
+    .finally(() => {
+      dispatch(setError(""));
     })
   };
 

@@ -9,6 +9,7 @@ type BasketCategoriesProp = {
 };
 
 export const BasketCategories = ({ materialsBasket, title, orderId }: BasketCategoriesProp) => {
+  console.log(materialsBasket);
   
   return (
     <li className={styles.basketCategoryBox}>
