@@ -19,7 +19,7 @@ export const DirectoryOrders = () => {
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
   const orderId = useAppSelector((state) => state.materials.currentOrderId);
   const [isDisabled, setIsDisabled] = useState(true);
-  const { materials } = useMaterials();
+  const { materials, setMaterials } = useMaterials();
   // console.log("materials", materials);
 
   useEffect(() => {
@@ -40,6 +40,7 @@ export const DirectoryOrders = () => {
     postOrderItem(payload)
       .then((data) => {
         dispatch(setCurrentOrder(data));
+        setMaterials([]);
       })
       .catch((error) => {
         dispatch(setError(error));

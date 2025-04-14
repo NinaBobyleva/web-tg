@@ -49,6 +49,10 @@ export const AddMaterialsBlock = () => {
       .then((data) => {
         dispatch(setCurrentOrder(data));
         setIsActiveModal(true);
+        setInputValue({
+          material: "",
+          quantity: "",
+        });
         setTimeout(() => {
           setIsActiveModal(false);
         }, 2000);
@@ -56,10 +60,6 @@ export const AddMaterialsBlock = () => {
       .catch((error) => {
         dispatch(setError(error));
       });
-    setInputValue({
-      material: "",
-      quantity: "",
-    });
   };
   return (
     <div className={styles.addMaterialBox}>
