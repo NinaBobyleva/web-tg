@@ -9,6 +9,7 @@ interface MaterialsContextType {
   materials: MaterialItem[];
   addMaterial: (material: MaterialItem) => void;
   updateMaterial: (name: string, quantity: number) => void;
+  setMaterials: React.Dispatch<React.SetStateAction<MaterialItem[]>>;
 }
 
 const MaterialsContext = createContext<MaterialsContextType | undefined>(undefined);
@@ -17,8 +18,8 @@ export const MaterialsProvider = ({ children }: { children: React.ReactNode }) =
   const [materials, setMaterials] = useState<MaterialItem[]>([]);
 
   const addMaterial = (material: MaterialItem) => {
-    const a = materials.find((el) => el.material === material.material);
-    if (!a) {
+    const existingMaterial = materials.find((el) => el.material === material.material);
+    if (!existingMaterial) {
         setMaterials((prev) => [...prev, material]);
     }
   };
@@ -27,7 +28,7 @@ export const MaterialsProvider = ({ children }: { children: React.ReactNode }) =
     setMaterials((prev) => prev.map((item) => (item.material === name ? { ...item, quantity } : item)));
   };
   return (
-    <MaterialsContext.Provider value={{ materials, addMaterial, updateMaterial }}>{children}</MaterialsContext.Provider>
+    <MaterialsContext.Provider value={{ materials, addMaterial, updateMaterial, setMaterials }}>{children}</MaterialsContext.Provider>
   );
 };
 
