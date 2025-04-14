@@ -32,7 +32,7 @@ export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: Order
         dispatch(setCurrentAddress(longAddress));
       })
       .catch((error) => {
-        dispatch(setError(error.message));
+        dispatch(setError(error));
       });
 
     navigate(paths.UPDATE);

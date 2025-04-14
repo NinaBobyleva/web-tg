@@ -3,13 +3,12 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./addMaterialsBlock.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { postOrderItem } from "../../api/apiOrderItems";
-import { setCurrentOrder } from "../../store/features/materialsSlice";
+import { setCurrentOrder, setError } from "../../store/features/materialsSlice";
 
 export const AddMaterialsBlock = () => {
   const dispatch = useAppDispatch();
   const [isActiveModal, setIsActiveModal] = useState(false);
-  const [error, setError] = useState("");
-  const orderId = useAppSelector((state) => state.materials.currentOrderId);
+  const { error, currentOrderId } = useAppSelector((state) => state.materials);
   const [isDisabled, setIsDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
     material: "",
@@ -30,7 +29,7 @@ export const AddMaterialsBlock = () => {
   const handleAddInputOrder = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!orderId) {
+    if (!currentOrderId) {
       return;
     }
     const newOrder = [
@@ -41,7 +40,7 @@ export const AddMaterialsBlock = () => {
     ];
 
     const payload = {
-      order: orderId,
+      order: currentOrderId,
       order_items: newOrder,
     };
 
@@ -54,7 +53,7 @@ export const AddMaterialsBlock = () => {
         }, 2000);
       })
       .catch((error) => {
-        setError(error);
+        dispatch(setError(error));
       });
     setInputValue({
       material: "",

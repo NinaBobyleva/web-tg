@@ -6,14 +6,14 @@ import { Categories } from "../Categories/Categories";
 import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setCategories, setCurrentOrder, setIsLoad } from "../../store/features/materialsSlice";
+import { setCategories, setCurrentOrder, setError, setIsLoad } from "../../store/features/materialsSlice";
 import { useMaterials } from "../../context/MaterialContext";
 import { postOrderItem } from "../../api/apiOrderItems";
 
 export const DirectoryOrders = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { categories, isLoad } = useAppSelector((state) => state.materials);
+  const { categories, isLoad, error } = useAppSelector((state) => state.materials);
   // console.log("categories", categories);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
@@ -42,7 +42,7 @@ export const DirectoryOrders = () => {
         dispatch(setCurrentOrder(data));
       })
       .catch((error) => {
-        console.log(error);
+        dispatch(setError(error));
       });
 
     navigate(paths.BASKET);
@@ -60,7 +60,7 @@ export const DirectoryOrders = () => {
         dispatch(setCategories(data.results));
       })
       .catch((error) => {
-        console.log(error);
+        dispatch(setError(error));
       })
       .finally(() => {
         dispatch(setIsLoad(false));
@@ -72,6 +72,7 @@ export const DirectoryOrders = () => {
       <h2 className={styles.title}>Выбрать из справочника</h2>
       <div className={styles.buttonBox}>
         <ButtonGray isDisabled={isDisabled} onClick={handleSubmitMaterials} title="Добавить выбранное" />
+        {error && <p className={styles.error}>{error}</p>}
         <Link to={paths.BASKET}>
           <img className={styles.img} src="./img/basket.svg" alt="" />
         </Link>

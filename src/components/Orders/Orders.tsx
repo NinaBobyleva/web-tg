@@ -41,7 +41,7 @@ export const Orders = () => {
         dispatch(setUser(res));
       })
       .catch((error) => {
-        console.log(error);
+        dispatch(setError(error));
       });
   }, [dispatch]);
   return (
