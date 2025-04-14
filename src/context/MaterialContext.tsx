@@ -35,7 +35,7 @@ export const MaterialsProvider = ({ children }: { children: React.ReactNode }) =
 export const useMaterials = () => {
   const context = useContext(MaterialsContext);
   if (!context) {
-    throw new Error("useMaterials must be used within a MaterialsProvider");
+    throw new Error("useMaterials Должен вчегда быть внутри MaterialsProvider");
   }
   return context;
 };

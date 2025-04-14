@@ -63,8 +63,11 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
         dispatch(setOrders(res.results));
       })
       .catch((error) => {
-        dispatch(setError(error));
-      });
+        dispatch(setError(error.message));
+      })
+      .finally(() => {
+        dispatch(setError(""));
+      })
 
     navigate(paths.UPDATE);
   };

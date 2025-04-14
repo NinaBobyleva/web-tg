@@ -41,8 +41,11 @@ export const Orders = () => {
         dispatch(setUser(res));
       })
       .catch((error) => {
-        dispatch(setError(error));
-      });
+        dispatch(setError(error.message));
+      })
+      .finally(() => {
+        dispatch(setError(""));
+      })
   }, [dispatch]);
   return (
     <div className={styles.ordersBox}>

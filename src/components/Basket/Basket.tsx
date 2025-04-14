@@ -15,6 +15,7 @@ import { Modal } from "../Modal/Modal";
 export const Basket = () => {
   const dispatch = useAppDispatch();
   const { currentOrder, currentOrderId, error } = useAppSelector((state) => state.materials);
+  console.log(currentOrder);
   const [isActiveModal, setIsActiveModal] = useState(false);
   const navigate = useNavigate();
 
@@ -31,8 +32,11 @@ export const Basket = () => {
         }, 2000);
       })
       .catch((error) => {
-        dispatch(setError(error));
-      });
+        dispatch(setError(error.message));
+      })
+      .finally(() => {
+        dispatch(setError(""));
+      })
   };
 
   return (
@@ -52,7 +56,7 @@ export const Basket = () => {
         {!error ? (
           <ul className={styles.list}>
             {currentOrder?.materials_by_category.map((el) => (
-              <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={el.id} />
+              <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={currentOrderId} />
             ))}
           </ul>
         ) : (

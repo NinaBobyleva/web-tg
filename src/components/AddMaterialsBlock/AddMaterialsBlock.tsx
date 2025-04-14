@@ -58,8 +58,11 @@ export const AddMaterialsBlock = () => {
         }, 2000);
       })
       .catch((error) => {
-        dispatch(setError(error));
-      });
+        dispatch(setError(error.message));
+      })
+      .finally(() => {
+        dispatch(setError(""));
+      })
   };
   return (
     <div className={styles.addMaterialBox}>

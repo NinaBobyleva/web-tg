@@ -10,7 +10,10 @@ export const useDeleteOrder = ({id}: {id: number | CurrentOrderType | undefined}
       dispatch(setOrders(res.results));
     })
     .catch((error) => {
-      dispatch(setError(error));
+      dispatch(setError(error.message));
+    })
+    .finally(() => {
+      dispatch(setError(""));
     })
   };
 
