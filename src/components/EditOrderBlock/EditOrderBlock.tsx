@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-// import { useAppDispatch } from "../../store/store";
 import { ButtonRed } from "../ButtonRed/ButtonRed";
 import { Input } from "../Input/Input";
 import styles from "./editOrderBlock.module.css";
@@ -7,9 +6,9 @@ import { paths } from "../../paths";
 import { useAppSelector } from "../../store/store";
 import { useDeleteOrder } from "../../hooks/useDeleteOrder";
 import { useState } from "react";
+import { Modal } from "../Modal/Modal";
 
 export const EditOrderBlock = () => {
-  // const dispatch = useAppDispatch();
   const { currentAddress, currentOrderId } = useAppSelector((state) => state.materials);
   const [isActiveModal, setIsActiveModal] = useState(false);
   const navigate = useNavigate();
@@ -18,10 +17,7 @@ export const EditOrderBlock = () => {
   return (
     <div className={styles.editBlock}>
       {isActiveModal && (
-        <div className={styles.modalBox}>
-          <p className={styles.modalTitle}>Заказ удален</p>
-          <img className={styles.modalImg} src="./img/icons-completed.svg" alt="completed" />
-        </div>
+        <Modal title="Заказ удален" />
       )}
       <h1 className={styles.title}>Редактирование заказа №{currentOrderId}</h1>
       <div className={styles.inputBox}>

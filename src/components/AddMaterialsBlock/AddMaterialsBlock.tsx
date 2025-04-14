@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./addMaterialsBlock.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { postOrderItem } from "../../api/apiOrderItems";
-import { setCurrentOrder } from "../../store/features/materialsSlice";
+import { setCurrentOrder, setError } from "../../store/features/materialsSlice";
+import { Modal } from "../Modal/Modal";
 
 export const AddMaterialsBlock = () => {
   const dispatch = useAppDispatch();
   const [isActiveModal, setIsActiveModal] = useState(false);
-  const [error, setError] = useState("");
-  const orderId = useAppSelector((state) => state.materials.currentOrderId);
+  const { error, currentOrderId } = useAppSelector((state) => state.materials);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
     material: "",
     quantity: "",
@@ -20,8 +21,18 @@ export const AddMaterialsBlock = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
+  useEffect(() => {
+    if (inputValue.material.length !== 0 && inputValue.quantity.length !== 0) {
+      setIsDisabled(false);
+    }
+  }, [inputValue]);
+
   const handleAddInputOrder = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (!currentOrderId) {
+      return;
+    }
     const newOrder = [
       {
         material: inputValue.material,
@@ -30,7 +41,7 @@ export const AddMaterialsBlock = () => {
     ];
 
     const payload = {
-      order: orderId,
+      order: currentOrderId,
       order_items: newOrder,
     };
 
@@ -40,10 +51,10 @@ export const AddMaterialsBlock = () => {
         setIsActiveModal(true);
         setTimeout(() => {
           setIsActiveModal(false);
-        }, 2000)
+        }, 2000);
       })
       .catch((error) => {
-        setError(error)
+        dispatch(setError(error));
       });
     setInputValue({
       material: "",
@@ -51,14 +62,9 @@ export const AddMaterialsBlock = () => {
     });
   };
   return (
-    <div>
+    <div className={styles.addMaterialBox}>
+      {isActiveModal && <Modal title="Материал добавлен в корзину" />}
       <h2 className={styles.title}>Добавить материалы</h2>
-      {isActiveModal && (
-        <div className={styles.modalBox}>
-          <p className={styles.modalTitle}>Материал добавлен в корзину</p>
-          <img className={styles.modalImg} src="./img/icons-completed.svg" alt="completed" />
-        </div>
-      )}
       <div className={styles.formBox}>
         <div className={styles.inputBox}>
           <input
@@ -76,7 +82,7 @@ export const AddMaterialsBlock = () => {
             type="number"
           />
         </div>
-        <ButtonGray onClick={handleAddInputOrder} title="Добавить" />
+        <ButtonGray isDisabled={isDisabled} onClick={handleAddInputOrder} title="Добавить" />
       </div>
       {error && <p className={styles.error}>{error}</p>}
     </div>

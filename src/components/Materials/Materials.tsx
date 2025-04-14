@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import styles from "./materials.module.css";
-import { Link } from "react-router-dom";
 import { useMaterials } from "../../context/MaterialContext";
 
 type MaterialsProp = {
@@ -41,9 +40,7 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
           <img className={styles.image} src={img_l} alt="material" />
           <p className={styles.imageName}>{name}</p>
           <div className={styles.imageCloseBox}>
-            <Link to={url}>
-              <p>Ссылка на товар</p>
-            </Link>
+            <a href={url}><p>Ссылка на товар</p></a>
             <img onClick={() => handleImageOpen("")} className={styles.imageClose} src="./img/close.svg" alt="close" />
           </div>
         </div>

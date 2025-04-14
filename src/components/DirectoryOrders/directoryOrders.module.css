@@ -22,3 +22,9 @@
   padding-top: 20px;
   padding-bottom: 60px;
 }
+
+.error {
+  color: #ff0000;
+  font-weight: 600;
+  text-align: center;
+}

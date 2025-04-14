@@ -3,7 +3,7 @@ import { Button } from "../Button/Button";
 import styles from "./materialsBasket.module.css";
 import { deleteOrderItem, editOrderItem } from "../../api/apiOrderItems";
 import { useAppDispatch } from "../../store/store";
-import { setOrder } from "../../store/features/materialsSlice";
+import { setError, setOrder } from "../../store/features/materialsSlice";
 import { getOrder } from "../../api/apiOrders";
 
 type MaterialsBasketProp = {
@@ -19,8 +19,12 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId }: Materials
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    editOrderItem({ id, quantity: Number(value) }).then((res) => res);
-  }, [value, id]);
+    editOrderItem({ id, quantity: Number(value) })
+    .then((res) => res)
+    .catch((error) => {
+      dispatch(setError(error));
+    })
+  }, [value, id, dispatch]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -52,7 +56,7 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId }: Materials
       dispatch(setOrder(data.materials_by_category));
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(setError(error));
     })
   };
 

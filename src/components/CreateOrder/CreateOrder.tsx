@@ -8,6 +8,7 @@ import {
   setCurrentAddress,
   setCurrentOrder,
   setCurrentOrderId,
+  setError,
   setOrders,
 } from "../../store/features/materialsSlice";
 import { AddressList } from "../AddressList/AddressList";
@@ -22,11 +23,10 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
   const dispatch = useAppDispatch();
   const [isDisabled, setIsDisabled] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  //   console.log(isOpen);
   const [inputValueAddress, setInputValueAddress] = useState("");
   //   console.log(inputValueAddress);
   const [addressId, setAddressId] = useState(0);
-  const addresses = useAppSelector((state) => state.materials.addresses);
+  const { addresses, error } = useAppSelector((state) => state.materials);
   //   console.log("addresses", addresses);
   const [inputValueDate, setInputValueDate] = useState("");
 
@@ -55,12 +55,16 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
         dispatch(setCurrentOrderId(data.id));
       })
       .catch((error) => {
-        console.log(error);
+        dispatch(setError(error));
       });
 
-    await getOrders().then((res) => {
-      dispatch(setOrders(res.results));
-    });
+    await getOrders()
+      .then((res) => {
+        dispatch(setOrders(res.results));
+      })
+      .catch((error) => {
+        dispatch(setError(error));
+      });
 
     navigate(paths.UPDATE);
   };
@@ -119,6 +123,7 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
         />
       </div>
       <ButtonGray isDisabled={isDisabled} onClick={handleAddNewOrder} title="Создать заказ" />
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };
