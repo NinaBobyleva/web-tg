@@ -3,30 +3,6 @@
   position: relative;
 }
 
-.modalBox {
-  padding: 40px 60px;
-  border-radius: 15px;
-  background: #fff;
-  position: absolute;
-  top: 150px;
-  left: 80px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.modalTitle {
-  font-weight: 600;
-  font-size: 16px;
-  padding-bottom: 20px;
-}
-
-.modalImg {
-  height: 40px;
-  width: 40px;
-}
-
 .title {
   padding-top: 10px;
   padding-bottom: 10px;

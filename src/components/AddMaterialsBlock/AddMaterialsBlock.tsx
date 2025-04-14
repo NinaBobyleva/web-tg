@@ -4,6 +4,7 @@ import styles from "./addMaterialsBlock.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { postOrderItem } from "../../api/apiOrderItems";
 import { setCurrentOrder, setError } from "../../store/features/materialsSlice";
+import { Modal } from "../Modal/Modal";
 
 export const AddMaterialsBlock = () => {
   const dispatch = useAppDispatch();
@@ -61,14 +62,9 @@ export const AddMaterialsBlock = () => {
     });
   };
   return (
-    <div>
+    <div className={styles.addMaterialBox}>
+      {isActiveModal && <Modal title="Материал добавлен в корзину" />}
       <h2 className={styles.title}>Добавить материалы</h2>
-      {isActiveModal && (
-        <div className={styles.modalBox}>
-          <p className={styles.modalTitle}>Материал добавлен в корзину</p>
-          <img className={styles.modalImg} src="./img/icons-completed.svg" alt="completed" />
-        </div>
-      )}
       <div className={styles.formBox}>
         <div className={styles.inputBox}>
           <input

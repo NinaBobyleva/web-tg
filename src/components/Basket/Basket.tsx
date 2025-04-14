@@ -10,6 +10,7 @@ import { editOrder } from "../../api/apiOrders";
 import { StatusType } from "../../types/types";
 import { useState } from "react";
 import { setError } from "../../store/features/materialsSlice";
+import { Modal } from "../Modal/Modal";
 
 export const Basket = () => {
   const dispatch = useAppDispatch();
@@ -37,12 +38,9 @@ export const Basket = () => {
   return (
     <>
       <EditOrderBlock />
-      <div className={styles.wrapperBasket}>
+      <div className={styles.basketBox}>
         {isActiveModal && (
-          <div className={styles.modalBox}>
-            <p className={styles.modalTitle}>Заказ успешно отправлен</p>
-            <img className={styles.modalImg} src="./img/icons-completed.svg" alt="completed" />
-          </div>
+          <Modal title="Заказ успешно отправлен" />
         )}
         <div className={styles.headerBasket}>
           <h2 className={styles.title}>Ваш заказ</h2>
