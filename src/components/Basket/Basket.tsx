@@ -15,9 +15,15 @@ import { Modal } from "../Modal/Modal";
 export const Basket = () => {
   const dispatch = useAppDispatch();
   const { currentOrder, currentOrderId, error } = useAppSelector((state) => state.materials);
-  console.log(currentOrder);
   const [isActiveModal, setIsActiveModal] = useState(false);
   const navigate = useNavigate();
+
+  // window.Telegram.WebApp.CloudStorage?.getItem('currentOrder', (err, value) => {
+  //   if (!err) console.log('Значение:', value);
+  // });
+
+  // const data = JSON.parse(localStorage.getItem('telegram_miniapp_data') || '{}');
+  // console.log(data);
 
   const handleEditOrder = () => {
     const status: StatusType = {
@@ -36,16 +42,14 @@ export const Basket = () => {
       })
       .finally(() => {
         dispatch(setError(""));
-      })
+      });
   };
 
   return (
     <>
       <EditOrderBlock />
       <div className={styles.basketBox}>
-        {isActiveModal && (
-          <Modal title="Заказ успешно отправлен" />
-        )}
+        {isActiveModal && <Modal title="Заказ успешно отправлен" />}
         <div className={styles.headerBasket}>
           <h2 className={styles.title}>Ваш заказ</h2>
           <div className={styles.btnBox}>

@@ -59,6 +59,9 @@ const materialsSlice = createSlice({
     builder.addCase(setUser, (state, action) => {
       state.userId = action?.payload?.id;
     });
+    // builder.addCase(saveToTelegramStorage, (state, action: PayloadAction<Record<string, string>>) => {
+    //   state.currentOrder = action?.payload?.data.;
+    // });
   },
 });
 
