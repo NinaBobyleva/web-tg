@@ -14,22 +14,16 @@ import { Modal } from "../Modal/Modal";
 
 export const Basket = () => {
   const dispatch = useAppDispatch();
-  const { currentOrder, currentOrderId, error } = useAppSelector((state) => state.materials);
+  const currentOrder = useAppSelector((state) => state.telegramStorage.data);
+  const error = useAppSelector((state) => state.materials.error);
   const [isActiveModal, setIsActiveModal] = useState(false);
   const navigate = useNavigate();
-
-  // window.Telegram.WebApp.CloudStorage?.getItem('currentOrder', (err, value) => {
-  //   if (!err) console.log('Значение:', value);
-  // });
-
-  // const data = JSON.parse(localStorage.getItem('telegram_miniapp_data') || '{}');
-  // console.log(data);
 
   const handleEditOrder = () => {
     const status: StatusType = {
       status: "in_progress",
     };
-    editOrder({ id: currentOrderId, status })
+    editOrder({ id: currentOrder?.id, status })
       .then(() => {
         setIsActiveModal(true);
         setTimeout(() => {
@@ -60,7 +54,7 @@ export const Basket = () => {
         {!error ? (
           <ul className={styles.list}>
             {currentOrder?.materials_by_category.map((el) => (
-              <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={currentOrderId} />
+              <BasketCategories key={el.id} materialsBasket={el.materials} title={el.name} orderId={currentOrder.id} />
             ))}
           </ul>
         ) : (

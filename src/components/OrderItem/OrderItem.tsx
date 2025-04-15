@@ -5,10 +5,10 @@ import { ButtonRed } from "../ButtonRed/ButtonRed";
 import styles from "./orderItem.module.css";
 import { paths } from "../../paths";
 import { useAppDispatch } from "../../store/store";
-import { setCurrentAddress, setCurrentOrder, setCurrentOrderId, setError } from "../../store/features/materialsSlice";
+import { setError } from "../../store/features/materialsSlice";
 import { useDeleteOrder } from "../../hooks/useDeleteOrder";
 import { getOrder } from "../../api/apiOrders";
-import { formatAddress } from "../../helpers/formatAddress";
+import { setItem } from "../../store/features/telegramStorageSlice";
 
 type OrderItemProp = {
   orderId: number;
@@ -25,17 +25,14 @@ export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: Order
   const handleEditOrder = () => {
     getOrder({ id: orderId })
       .then((data) => {
-        dispatch(setCurrentOrder(data));
-        dispatch(setCurrentOrderId(orderId));
-        const longAddress = formatAddress(address);
-        dispatch(setCurrentAddress(longAddress));
+        dispatch(setItem(data));
       })
       .catch((error) => {
         dispatch(setError(error.message));
       })
       .finally(() => {
         dispatch(setError(""));
-      })
+      });
 
     navigate(paths.UPDATE);
   };
@@ -54,10 +51,7 @@ export const OrderItem = ({ orderId, address, itemsCount, totalQuantity }: Order
         </div>
       </div>
       <div className={styles.orderBtnBox}>
-        <ButtonGray
-          onClick={handleEditOrder}
-          title="Редактировать"
-        />
+        <ButtonGray onClick={handleEditOrder} title="Редактировать" />
         <ButtonRed onClick={handleDeleteOrder} title="Удалить" />
       </div>
     </li>

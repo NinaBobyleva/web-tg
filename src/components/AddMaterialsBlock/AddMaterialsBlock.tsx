@@ -3,13 +3,15 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./addMaterialsBlock.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { postOrderItem } from "../../api/apiOrderItems";
-import { setCurrentOrder, setError } from "../../store/features/materialsSlice";
+import { setError } from "../../store/features/materialsSlice";
 import { Modal } from "../Modal/Modal";
+import { setItem } from "../../store/features/telegramStorageSlice";
 
 export const AddMaterialsBlock = () => {
   const dispatch = useAppDispatch();
   const [isActiveModal, setIsActiveModal] = useState(false);
-  const { error, currentOrderId } = useAppSelector((state) => state.materials);
+  const currentOrder = useAppSelector((state) => state.telegramStorage.data);
+  const { error } = useAppSelector((state) => state.materials);
   const [isDisabled, setIsDisabled] = useState(true);
   const [inputValue, setInputValue] = useState({
     material: "",
@@ -30,7 +32,7 @@ export const AddMaterialsBlock = () => {
   const handleAddInputOrder = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!currentOrderId) {
+    if (!currentOrder?.id) {
       return;
     }
     const newOrder = [
@@ -41,13 +43,13 @@ export const AddMaterialsBlock = () => {
     ];
 
     const payload = {
-      order: currentOrderId,
+      order: currentOrder.id,
       order_items: newOrder,
     };
 
     postOrderItem(payload)
       .then((data) => {
-        dispatch(setCurrentOrder(data));
+        dispatch(setItem(data));
         setIsActiveModal(true);
         setInputValue({
           material: "",
@@ -62,7 +64,7 @@ export const AddMaterialsBlock = () => {
       })
       .finally(() => {
         dispatch(setError(""));
-      })
+      });
   };
   return (
     <div className={styles.addMaterialBox}>

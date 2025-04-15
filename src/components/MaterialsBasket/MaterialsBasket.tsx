@@ -3,8 +3,9 @@ import { Button } from "../Button/Button";
 import styles from "./materialsBasket.module.css";
 import { deleteOrderItem, editOrderItem } from "../../api/apiOrderItems";
 import { useAppDispatch } from "../../store/store";
-import { setCurrentOrder, setError } from "../../store/features/materialsSlice";
+import { setError } from "../../store/features/materialsSlice";
 import { getOrder } from "../../api/apiOrders";
+import { setItem } from "../../store/features/telegramStorageSlice";
 
 type MaterialsBasketProp = {
   title: string;
@@ -15,7 +16,6 @@ type MaterialsBasketProp = {
 };
 
 export const MaterialsBasket = ({ title, img, quantity, id, orderId }: MaterialsBasketProp) => {
-  console.log(orderId);
   const [value, setValue] = useState(quantity.toString());
   const dispatch = useAppDispatch();
 
@@ -55,14 +55,13 @@ export const MaterialsBasket = ({ title, img, quantity, id, orderId }: Materials
   };
 
   const handleDeleteMaterial = async () => {
-    console.log(id);
     await deleteOrderItem({ id })
     .then((res) => res)
     .catch((error) => {
       dispatch(setError(error.message));
     })
     await getOrder({ id: orderId }).then((data) => {
-      dispatch(setCurrentOrder(data));
+      dispatch(setItem(data));
     })
     .catch((error) => {
       dispatch(setError(error.message));

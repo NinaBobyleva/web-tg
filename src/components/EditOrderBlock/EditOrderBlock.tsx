@@ -3,32 +3,29 @@ import { ButtonRed } from "../ButtonRed/ButtonRed";
 import { Input } from "../Input/Input";
 import styles from "./editOrderBlock.module.css";
 import { paths } from "../../paths";
-// import { useAppSelector } from "../../store/store";
+import { useAppSelector } from "../../store/store";
 import { useDeleteOrder } from "../../hooks/useDeleteOrder";
 import { useState } from "react";
 import { Modal } from "../Modal/Modal";
+import { formatAddress } from "../../utils/helpers";
 
 export const EditOrderBlock = () => {
-  // const { currentAddress, currentOrderId } = useAppSelector((state) => state.materials);
+  const currentOrder = useAppSelector((state) => state.telegramStorage.data);
   const [isActiveModal, setIsActiveModal] = useState(false);
   const navigate = useNavigate();
-  const data = JSON.parse(localStorage.getItem('telegram_miniapp_data') || '{}');
-  console.log(data);
+  const currentOrderId = currentOrder.id;
+  const currentAddress = formatAddress(currentOrder?.address);
 
-  const address = `${data.address.city}, ${data.address.street}, ${data.address.house}${data.address.building}, ${data.address.office}, ${data.address.floor}`;
-  const id = data.id;
-  console.log(address);
-
-  const handleDeleteOrder = useDeleteOrder({ id: id });
+  const handleDeleteOrder = useDeleteOrder({ id: currentOrderId });
   return (
     <div className={styles.editBlock}>
       {isActiveModal && (
         <Modal title="Заказ удален" />
       )}
-      <h1 className={styles.title}>Редактирование заказа №{id}</h1>
+      <h1 className={styles.title}>Редактирование заказа №{currentOrderId}</h1>
       <div className={styles.inputBox}>
         <span>Адрес:</span>
-        <Input type="text" value={address && address} />
+        <Input type="text" value={currentAddress && currentAddress} />
       </div>
       <div className={styles.buttonBox}>
         <ButtonRed

@@ -4,7 +4,7 @@ import { getOrders } from "../../api/apiOrders";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setError, setOrders } from "../../store/features/materialsSlice";
 import { OrderItem } from "../OrderItem/OrderItem";
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
+import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import { CreateOrder } from "../CreateOrder/CreateOrder";
 import { postUser } from "../../api/apiUser";
 import { setUser } from "../../store/features/userSlice";
@@ -13,10 +13,8 @@ export const Orders = () => {
   const { tgWebAppData } = retrieveLaunchParams();
   const dispatch = useAppDispatch();
   const orders = useAppSelector((state) => state.materials.orders);
-  // console.log("orders", orders);
   const user = useAppSelector((state) => state.user.user);
   const userOrders = orders.filter((el) => el.user !== null && el.user.id === user?.id && el.status === "draft");
-  // console.log("userOrders", userOrders);
 
   useEffect(() => {
     getOrders()
@@ -45,7 +43,7 @@ export const Orders = () => {
       })
       .finally(() => {
         dispatch(setError(""));
-      })
+      });
   }, [dispatch]);
   return (
     <div className={styles.ordersBox}>

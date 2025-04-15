@@ -34,7 +34,7 @@ export type CategoriesBasketType = {
 export type CurrentOrderType = {
   id: number;
   user: UserType[];
-  address: AddressType[];
+  address: AddressType;
   materials_by_category: CategoriesBasketType[];
   status: string;
   date_of_delivery: string;
