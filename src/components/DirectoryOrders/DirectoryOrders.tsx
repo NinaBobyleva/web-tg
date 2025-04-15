@@ -20,11 +20,13 @@ export const DirectoryOrders = () => {
   const orderId = useAppSelector((state) => state.materials.currentOrderId);
   const [isDisabled, setIsDisabled] = useState(true);
   const { materials, setMaterials } = useMaterials();
-  // console.log("materials", materials);
+  console.log("materials", materials);
 
   useEffect(() => {
     if (materials.length !== 0) {
       setIsDisabled(false);
+    } else if (materials.length === 0) {
+      setIsDisabled(true);
     }
   }, [materials]);
 
