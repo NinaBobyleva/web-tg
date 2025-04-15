@@ -21,7 +21,6 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
   }
 
   const handleQuantityChange = (newQuantity: number) => {
-    console.log(newQuantity);
     const validatedQuantity = Math.max(0, newQuantity);
     setQuantity(validatedQuantity);
 

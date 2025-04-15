@@ -49,7 +49,7 @@ export const postOrder = async (newOrder: newOrder) => {
   return response;
 };
 
-export const editOrder = async ({ id, status }: { id: number, status: StatusType }) => {
+export const editOrder = async ({ id, status }: { id: number | undefined, status: StatusType }) => {
   const res = await fetch(ORDERS_URL + `${id}/`, {
     method: "PATCH",
     body: JSON.stringify(status),

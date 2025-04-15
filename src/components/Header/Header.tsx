@@ -7,7 +7,6 @@ import { paths } from "../../paths";
 export const Header = () => {
   const navigate = useNavigate();
   const { tgWebAppData } = retrieveLaunchParams();
-  console.log("launchParams", tgWebAppData);
 
   return (
     <div className={styles.header}>
@@ -17,7 +16,6 @@ export const Header = () => {
         </Link>
         <div className={styles.btnBox}>
           <ButtonGray onClick={() => navigate(paths.HOME)} title="Мои заказы" />
-          {/* <ButtonGray title="Выйти" /> */}
         </div>
       </div>
       <div className={styles.loginBox}>

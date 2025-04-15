@@ -3,20 +3,13 @@ import { ButtonGray } from "../ButtonGray/ButtonGray";
 import styles from "./createOrder.module.css";
 import { getAllAddresses } from "../../api/apiAddresses";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import {
-  setAddresses,
-  setCurrentAddress,
-  setCurrentOrder,
-  setCurrentOrderId,
-  setError,
-  setOrders,
-} from "../../store/features/materialsSlice";
+import { setAddresses, setError, setOrders } from "../../store/features/materialsSlice";
 import { AddressList } from "../AddressList/AddressList";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 import { getOrders, postOrder } from "../../api/apiOrders";
 import { newOrder } from "../../types/types";
-import { formatAddress } from "../../helpers/formatAddress";
+import { setItem } from "../../store/features/telegramStorageSlice";
 
 export const CreateOrder = ({ user }: { user: number | undefined }) => {
   const navigate = useNavigate();
@@ -24,10 +17,8 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [inputValueAddress, setInputValueAddress] = useState("");
-  //   console.log(inputValueAddress);
   const [addressId, setAddressId] = useState(0);
   const { addresses, error } = useAppSelector((state) => state.materials);
-  //   console.log("addresses", addresses);
   const [inputValueDate, setInputValueDate] = useState("");
 
   useEffect(() => {
@@ -47,15 +38,7 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
 
     await postOrder(newOrder)
       .then((data) => {
-        dispatch(setCurrentOrderId(data.id));
-        dispatch(setCurrentOrder(data));
-        localStorage.setItem('telegram_miniapp_data', JSON.stringify(data));
-        // window.Telegram.WebApp.CloudStorage?.setItem("currentOrder", data, (err) => {
-        //   if (!err) console.log("Сохранено");
-        // });
-        const longAddress = formatAddress(data.address);
-        dispatch(setCurrentAddress(longAddress));
-        dispatch(setCurrentOrderId(data.id));
+        dispatch(setItem(data));
       })
       .catch((error) => {
         dispatch(setError(error.message));
@@ -70,7 +53,7 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
       })
       .finally(() => {
         dispatch(setError(""));
-      })
+      });
 
     navigate(paths.UPDATE);
   };

@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AddressType, CategoriesType, CurrentOrderType, OrdersType } from "../../types/types";
+import { AddressType, CategoriesType, OrdersType } from "../../types/types";
 import { setUser } from "./userSlice";
 
 type SeminarsStateType = {
   categories: CategoriesType[];
-  currentOrder: CurrentOrderType | null;
   orders: OrdersType[];
   addresses: AddressType[];
   currentAddress: string;
@@ -16,7 +15,6 @@ type SeminarsStateType = {
 
 const initialState: SeminarsStateType = {
   categories: [],
-  currentOrder: null,
   orders: [],
   addresses: [],
   currentAddress: "",
@@ -33,14 +31,8 @@ const materialsSlice = createSlice({
     setCategories: (state, action: PayloadAction<[]>) => {
       state.categories = action.payload;
     },
-    setCurrentOrder: (state, action: PayloadAction<CurrentOrderType | null>) => {
-      state.currentOrder = action.payload;
-    },
     setIsLoad: (state, action: PayloadAction<boolean>) => {
       state.isLoad = action.payload;
-    },
-    setCurrentOrderId: (state, action: PayloadAction<number>) => {
-      state.currentOrderId = action.payload;
     },
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
@@ -50,29 +42,20 @@ const materialsSlice = createSlice({
     },
     setAddresses: (state, action: PayloadAction<[]>) => {
       state.addresses = action.payload;
-    },
-    setCurrentAddress: (state, action: PayloadAction<string>) => {
-      state.currentAddress = action.payload;
     }
   },
   extraReducers: (builder) => {
     builder.addCase(setUser, (state, action) => {
       state.userId = action?.payload?.id;
     });
-    // builder.addCase(saveToTelegramStorage, (state, action: PayloadAction<Record<string, string>>) => {
-    //   state.currentOrder = action?.payload?.data.;
-    // });
   },
 });
 
 export const {
   setCategories,
-  setCurrentOrder,
   setIsLoad,
-  setCurrentOrderId,
   setError,
   setOrders,
-  setAddresses,
-  setCurrentAddress
+  setAddresses
 } = materialsSlice.actions;
 export const materialsReducers = materialsSlice.reducer;

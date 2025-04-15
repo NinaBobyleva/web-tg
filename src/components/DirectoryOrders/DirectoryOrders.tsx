@@ -6,21 +6,20 @@ import { Categories } from "../Categories/Categories";
 import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../../paths";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { setCategories, setCurrentOrder, setError, setIsLoad } from "../../store/features/materialsSlice";
+import { setCategories, setError, setIsLoad } from "../../store/features/materialsSlice";
 import { useMaterials } from "../../context/MaterialContext";
 import { postOrderItem } from "../../api/apiOrderItems";
+import { setItem } from "../../store/features/telegramStorageSlice";
 
 export const DirectoryOrders = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const currentOrder = useAppSelector((state) => state.telegramStorage.data);
   const { categories, isLoad } = useAppSelector((state) => state.materials);
-  // console.log("categories", categories);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
-  const orderId = useAppSelector((state) => state.materials.currentOrderId);
   const [isDisabled, setIsDisabled] = useState(true);
   const { materials, setMaterials } = useMaterials();
-  console.log("materials", materials);
 
   useEffect(() => {
     if (materials.length !== 0) {
@@ -31,8 +30,11 @@ export const DirectoryOrders = () => {
   }, [materials]);
 
   const handleSubmitMaterials = () => {
+    if (!currentOrder?.id) {
+      return;
+    }
     const payload = {
-      order: orderId,
+      order: currentOrder?.id,
       order_items: materials,
     };
 
@@ -41,7 +43,7 @@ export const DirectoryOrders = () => {
     }
     postOrderItem(payload)
       .then((data) => {
-        dispatch(setCurrentOrder(data));
+        dispatch(setItem(data));
         setMaterials([]);
       })
       .catch((error) => {
@@ -49,7 +51,7 @@ export const DirectoryOrders = () => {
       })
       .finally(() => {
         dispatch(setError(""));
-      })
+      });
 
     navigate(paths.BASKET);
   };
