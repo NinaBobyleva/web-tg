@@ -31,7 +31,7 @@ export const Categories = ({
       </div>
       <ul className={styles.listMaterials}>
         {isActive &&
-          materials.map((el, i) => (
+          materials.map((el) => (
             <Materials
               key={el.id}
               name={el.name}
@@ -40,7 +40,6 @@ export const Categories = ({
               img_t={el.image_thumbnail_url}
               img_l={el.image_large_url}
               url={el.url}
-              index={i}
             />
           ))}
       </ul>

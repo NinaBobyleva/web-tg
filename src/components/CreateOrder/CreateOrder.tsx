@@ -49,13 +49,16 @@ export const CreateOrder = ({ user }: { user: number | undefined }) => {
       .then((data) => {
         dispatch(setCurrentOrderId(data.id));
         dispatch(setCurrentOrder(data));
-        console.log(data);
+        localStorage.setItem('telegram_miniapp_data', JSON.stringify(data));
+        // window.Telegram.WebApp.CloudStorage?.setItem("currentOrder", data, (err) => {
+        //   if (!err) console.log("Сохранено");
+        // });
         const longAddress = formatAddress(data.address);
         dispatch(setCurrentAddress(longAddress));
         dispatch(setCurrentOrderId(data.id));
       })
       .catch((error) => {
-        dispatch(setError(error));
+        dispatch(setError(error.message));
       });
 
     await getOrders()

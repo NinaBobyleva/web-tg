@@ -10,19 +10,18 @@ type MaterialsProp = {
   isActiveMaterial: boolean;
   handleImageOpen: (materialName: string) => void;
   url: string;
-  index: number;
 };
 
-export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen, url, index }: MaterialsProp) => {
+export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpen, url }: MaterialsProp) => {
   const { addMaterial, updateMaterial } = useMaterials();
   const [quantity, setQuantity] = useState<number>(0);
-  // const navigate = useNavigate();
 
   if (!url) {
     return;
   }
 
   const handleQuantityChange = (newQuantity: number) => {
+    console.log(newQuantity);
     const validatedQuantity = Math.max(0, newQuantity);
     setQuantity(validatedQuantity);
 
@@ -36,7 +35,6 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
     <div className={styles.li}>
       {isActiveMaterial ? (
         <div className={styles.imageBox}>
-          {/* <BackButton /> */}
           <img className={styles.image} src={img_l} alt="material" />
           <p className={styles.imageName}>{name}</p>
           <div className={styles.imageCloseBox}>
@@ -57,7 +55,6 @@ export const Materials = ({ name, img_t, img_l, isActiveMaterial, handleImageOpe
             <Button
               onClick={() => {
                 handleQuantityChange(quantity + 1);
-                console.log(index);
               }}
               title="+"
             />

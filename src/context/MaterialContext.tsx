@@ -25,7 +25,7 @@ export const MaterialsProvider = ({ children }: { children: React.ReactNode }) =
   };
 
   const updateMaterial = (name: string, quantity: number) => {
-    setMaterials((prev) => prev.map((item) => (item.material === name ? { ...item, quantity } : item)));
+    setMaterials((prev) => prev.map((item) => (item.material === name ? { ...item, quantity } : item)).filter(item => item.quantity !== 0));
   };
   return (
     <MaterialsContext.Provider value={{ materials, addMaterial, updateMaterial, setMaterials }}>{children}</MaterialsContext.Provider>
@@ -35,7 +35,7 @@ export const MaterialsProvider = ({ children }: { children: React.ReactNode }) =
 export const useMaterials = () => {
   const context = useContext(MaterialsContext);
   if (!context) {
-    throw new Error("useMaterials Должен вчегда быть внутри MaterialsProvider");
+    throw new Error("useMaterials должен всегда находиться внутри MaterialsProvider");
   }
   return context;
 };
