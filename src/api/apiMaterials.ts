@@ -1,8 +1,8 @@
-const BASE_URL = "https://dev.kr-order.ru/api/";
-// const BASE_URL = "https://kr-order.ru/api/";
+// const MATERIALS_URL = "https://dev.kr-order.ru/api/categories/";
+const MATERIALS_URL = "https://kr-order.ru/api/categories/";
 
 export const getAllMaterials = async () => {
-  const res = await fetch(BASE_URL + "categories/");
+  const res = await fetch(MATERIALS_URL);
 
   if (res.status === 500) {
     throw new Error("Сервер устал, попробуйте еще раз");

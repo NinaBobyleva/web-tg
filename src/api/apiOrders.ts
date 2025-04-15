@@ -1,6 +1,7 @@
 import { CurrentOrderType, newOrder, StatusType } from "../types/types";
 
-const ORDERS_URL = "https://dev.kr-order.ru/api/orders/";
+// const ORDERS_URL = "https://dev.kr-order.ru/api/orders/";
+const ORDERS_URL = "https://kr-order.ru/api/orders/";
 
 export const getOrders = async () => {
   const res = await fetch(ORDERS_URL);

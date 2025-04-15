@@ -1,6 +1,7 @@
 import { OrderRequest } from "../types/types";
 
-const ORDER_ITEMS_URL = "https://dev.kr-order.ru/api/order-items/";
+// const ORDER_ITEMS_URL = "https://dev.kr-order.ru/api/order-items/";
+const ORDER_ITEMS_URL = "https://kr-order.ru/api/order-items/";
 
 export const editOrderItem = async ({ id, quantity }: { id: number; quantity: number }) => {
   const res = await fetch(ORDER_ITEMS_URL + `${id}/`, {

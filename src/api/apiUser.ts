@@ -1,4 +1,5 @@
-const USER_TELEGRAM_URL = "https://dev.kr-order.ru/api/telegram-user/";
+// const USER_TELEGRAM_URL = "https://dev.kr-order.ru/api/telegram-user/";
+const USER_TELEGRAM_URL = "https://kr-order.ru/api/telegram-user/";
 
 type UserData = {
   id: number | undefined;
