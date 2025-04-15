@@ -1,4 +1,5 @@
-const ADDRESSES_URL = "https://dev.kr-order.ru/api/addresses/";
+// const ADDRESSES_URL = "https://dev.kr-order.ru/api/addresses/";
+const ADDRESSES_URL = "https://kr-order.ru/api/addresses/";
 
 export const getAllAddresses = async () => {
   const res = await fetch(ADDRESSES_URL);
