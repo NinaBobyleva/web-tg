@@ -15,6 +15,7 @@ interface MaterialsContextType {
 const MaterialsContext = createContext<MaterialsContextType | undefined>(undefined);
 
 export const MaterialsProvider = ({ children }: { children: React.ReactNode }) => {
+  
   const [materials, setMaterials] = useState<MaterialItem[]>([]);
 
   const addMaterial = (material: MaterialItem) => {
